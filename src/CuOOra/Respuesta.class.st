@@ -3,7 +3,7 @@ Class {
 	#superclass : #Post,
 	#instVars : [
 		'titulo',
-		'pepe'
+		'nombre'
 	],
 	#category : #CuOOra
 }
