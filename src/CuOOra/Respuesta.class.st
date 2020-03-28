@@ -2,7 +2,8 @@ Class {
 	#name : #Respuesta,
 	#superclass : #Post,
 	#instVars : [
-		'titulo'
+		'titulo',
+		'descrp'
 	],
 	#category : #CuOOra
 }
