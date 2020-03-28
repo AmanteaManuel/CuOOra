@@ -1,6 +1,6 @@
 Class {
 	#name : #Respuesta,
-	#superclass : #Object,
+	#superclass : #Post,
 	#instVars : [
 		'titulo'
 	],
