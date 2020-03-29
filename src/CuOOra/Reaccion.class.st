@@ -7,14 +7,12 @@ Class {
 	#category : #CuOOra
 }
 
-{ #category : #'instance creation' }
-Reaccion class >> newReaccion [
-]
-
 { #category : #initialization }
 Reaccion >> initialize [
+	fechaHora := DateAndTime now.
 ]
 
 { #category : #initialization }
 Reaccion >> soyLike [
+	self subclassResponsibility 
 ]

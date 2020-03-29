@@ -4,6 +4,12 @@ Class {
 	#category : #CuOOra
 }
 
-{ #category : #initialization }
+{ #category : #'instance creation' }
+Like class >> newLike [
+	^ self new.
+]
+
+{ #category : #methods }
 Like >> soyLike [
+	^ true
 ]
