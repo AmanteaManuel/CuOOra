@@ -18,6 +18,11 @@ Pregunta class >> newPregunta:tituloStr descripcion:descripcionStr topicos:topic
 		titulo: tituloStr; descripcion: descripcionStr; topicos: topicosList.
 ]
 
+{ #category : #methods }
+Pregunta >> agregarRespuesta:respuestaObj [
+	respuestas add: respuestaObj.
+]
+
 { #category : #initialization }
 Pregunta >> initialize [
 	self
