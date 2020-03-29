@@ -1,3 +1,6 @@
+"
+""Clase usuario""
+"
 Class {
 	#name : #Usuario,
 	#superclass : #Object,
@@ -46,6 +49,9 @@ Usuario >> agregarTopicoInteres: unTopico [
 
 { #category : #methods }
 Usuario >> calcularPuntaje [
+	^ self obtenerPreguntas size * 20
+		+ (self obtenerRespuestas size * 50)
+		+ self diferenciaLikeDislikesPreguntas + self diferenciaLikeDislikesRespuestas 
 ]
 
 { #category : #methods }
@@ -55,9 +61,7 @@ Usuario >> cantidadPreguntas [
 
 { #category : #methods }
 Usuario >> cantidadRespuestas [
-	| resp |
-	resp := posts collect: [ :post | post soyPregunta not ].
-	^ resp size
+	self obtenerRespuestas size.
 ]
 
 { #category : #accessing }
@@ -76,7 +80,7 @@ Usuario >> darLike: unPost [
 ]
 
 { #category : #methods }
-Usuario >> diferenciaLikeDislikesPregunta [
+Usuario >> diferenciaLikeDislikesPreguntas [
 	| preguntas cantLikes cantDislikes |
 	preguntas := self obtenerPreguntas.
 	cantLikes := preguntas collect: [ :preg | preg cantLikes ].
@@ -85,8 +89,19 @@ Usuario >> diferenciaLikeDislikesPregunta [
 ]
 
 { #category : #methods }
+Usuario >> diferenciaLikeDislikesRespuestas [
+	| respuestas cantLikes cantDislikes |
+	respuestas := self obtenerRespuestas.
+	cantLikes := respuestas collect: [ :preg | preg cantLikes ].
+	cantDislikes := respuestas collect: [ :preg | preg cantDislikes ].
+	^ cantLikes - cantDislikes
+]
+
+{ #category : #methods }
 Usuario >> eliminarPregunta: unaPregunta [
-	self obtenerPreguntas remove: unaPregunta
+	"hace baja logica"
+	(self obtenerPreguntas detect: [ :preg | preg = unaPregunta ]) ponerInactivo 
+	
 ]
 
 { #category : #initialization }
@@ -108,6 +123,11 @@ Usuario >> obtenerPreguntas [
 ]
 
 { #category : #methods }
+Usuario >> obtenerRespuestas [
+	^ posts collect: [ :pregunta | pregunta soyPregunta not ]
+]
+
+{ #category : #methods }
 Usuario >> sacarDislike: unPost [
 
 ]
@@ -119,12 +139,13 @@ Usuario >> sacarLike: unPost [
 
 { #category : #methods }
 Usuario >> seguirUsuario: unUsuario [
-	follows add: unUsuario 
+	(self sigueAUsuario: unUsuario)
+		ifFalse: [ follows add: unUsuario ]
 ]
 
 { #category : #methods }
 Usuario >> sigueAUsuario: unUsuario [
-	^ (follows detect: [ :follow | follow = unUsuario ])
+	^ follows includes: unUsuario
 ]
 
 { #category : #methods }
