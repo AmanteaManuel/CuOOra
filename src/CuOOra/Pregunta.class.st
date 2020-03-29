@@ -13,18 +13,20 @@ Class {
 }
 
 { #category : #'instance creation' }
-Pregunta class >> newPregunta:tituloStr descripcion:descripcionStr [
+Pregunta class >> newPregunta:tituloStr descripcion:descripcionStr topicos:topicosList [
 	^ self new	
-		titulo: tituloStr; descripcion: descripcionStr;
-		activo: true; fecha: Date today; hora: Date today hour;
-		reacciones: OrderedCollection new; respuestas: OrderedCollection new;
-		topicos: OrderedCollection new.
-		
-	
+		titulo: tituloStr; descripcion: descripcionStr; topicos: topicosList.
 ]
 
 { #category : #initialization }
-Pregunta >> initialize [ 
+Pregunta >> initialize [
+	self
+		activo: true; 
+		fecha: Date today; 
+		hora: Date today hour;
+		reacciones: OrderedCollection new; 
+		respuestas: OrderedCollection new.
+		
 ]
 
 { #category : #methods }

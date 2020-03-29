@@ -25,8 +25,13 @@ Post >> activo: bool [
 ]
 
 { #category : #methods }
-Post >> cantLikes [
+Post >> cantDislikes [
+	^ reacciones collect: [ :reacion | reacion  not soyLike  ] size
+]
 
+{ #category : #methods }
+Post >> cantLikes [
+	^ reacciones collect: [ :reacion | reacion soyLike  ] size
 ]
 
 { #category : #accesing }
@@ -65,6 +70,7 @@ Post >> initialize [
 
 { #category : #methods }
 Post >> ponerInactivo [
+	self activo: false.
 ]
 
 { #category : #accesing }
