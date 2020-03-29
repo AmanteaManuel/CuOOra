@@ -6,11 +6,41 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'nombre',
-		'descripcio'
+		'descripcion'
 	],
 	#category : #CuOOra
 }
 
 { #category : #'instance creation' }
 Topico class >> newTopico:nombreStr descripcion:descripcionStr [
+	^ self new
+		nombre: nombreStr; 
+		descripcion: descripcionStr.
+]
+
+{ #category : #accesing }
+Topico >> descripcion [
+	^descripcion.
+]
+
+{ #category : #accesing }
+Topico >> descripcion:unaDescripcion [
+	descripcion:= unaDescripcion.
+]
+
+{ #category : #methods }
+Topico >> existeNombre:nombreStr [
+	^(nombre asUppercase = nombreStr asUppercase)
+]
+
+{ #category : #accesing }
+Topico >> nombre [
+	^nombre.
+	
+]
+
+{ #category : #accesing }
+Topico >> nombre:unNombreStr [
+	nombre:= unNombreStr.
+	
 ]

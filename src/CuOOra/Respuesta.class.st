@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-Respuesta class >> newRespuesta:descripcionStr usuario:unUsuario [
+Respuesta class >> newRespuesta:descripcionStr [
 	^ self new	
-		descripcion: descripcionStr; usuario: unUsuario 
+		descripcion: descripcionStr.
 ]
 
 { #category : #initialization }
