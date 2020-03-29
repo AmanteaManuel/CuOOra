@@ -1,3 +1,6 @@
+"
+clase que modela una Respuesta en el sistema, la misma hereda del posteo.
+"
 Class {
 	#name : #Pregunta,
 	#superclass : #Post,
@@ -11,6 +14,13 @@ Class {
 
 { #category : #'instance creation' }
 Pregunta class >> newPregunta:tituloStr descripcion:descripcionStr [
+	^ self new	
+		titulo: tituloStr; descripcion: descripcionStr;
+		activo: true; fecha: Date today; hora: Date today hour;
+		reacciones: OrderedCollection new; respuestas: OrderedCollection new;
+		topicos: OrderedCollection new.
+		
+	
 ]
 
 { #category : #initialization }
@@ -18,11 +28,33 @@ Pregunta >> initialize [
 ]
 
 { #category : #methods }
-Pregunta >> perteneceATopico [
+Pregunta >> perteneceATopico:unTopico [
+	^ [topicos includes:unTopico]
+]
+
+{ #category : #accesing }
+Pregunta >> reacciones [ 
+	^ reacciones.
+]
+
+{ #category : #accesing }
+Pregunta >> reacciones: list [
+	reacciones:= list.
+]
+
+{ #category : #accesing }
+Pregunta >> respuestas [
+	^ respuestas.
+]
+
+{ #category : #accesing }
+Pregunta >> respuestas: list [
+	respuestas:= list.
 ]
 
 { #category : #methods }
 Pregunta >> soyPregunta [
+	^true.
 ]
 
 { #category : #accesing }
@@ -33,4 +65,14 @@ Pregunta >> titulo [
 { #category : #accesing }
 Pregunta >> titulo:unString [
 	titulo := unString.
+]
+
+{ #category : #accesing }
+Pregunta >> topicos [ 
+	^ topicos.
+]
+
+{ #category : #accesing }
+Pregunta >> topicos: list [
+	topicos:= list.
 ]
