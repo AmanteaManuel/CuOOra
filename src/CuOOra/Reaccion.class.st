@@ -15,3 +15,13 @@ Class {
 Reaccion >> soyLike [
 	self subclassResponsibility 
 ]
+
+{ #category : #methods }
+Reaccion >> tieneLikeDe:usuarioObj [
+	^ (self usuario = usuarioObj).
+]
+
+{ #category : #accesing }
+Reaccion >> usuario [
+	^usuario.
+]
