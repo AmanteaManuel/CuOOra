@@ -40,8 +40,10 @@ reacciones add: (Dislike new)
 ]
 
 { #category : #methods }
-Post >> darLike [
-	reacciones add: (Like new).
+Post >> darLike: usuarioObj [
+	(self tieneLikeDe: usuarioObj)
+	ifTrue:  [ reacciones add: (Like new: usuarioObj) ]
+	
 ]
 
 { #category : #accesing }
@@ -101,4 +103,11 @@ Post >> sacarLike [
 { #category : #methods }
 Post >> soyPregunta [
  ^ self subclassResponsibility.
+]
+
+{ #category : #methods }
+Post >> tieneLikeDe: usuarioObj [ 
+|likes|
+	likes  := reacciones detect: [ :r | r soyLike ].
+	^(likes detect: [ :l | l tieneLikeDe: usuarioObj ]).
 ]

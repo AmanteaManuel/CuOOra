@@ -1,3 +1,6 @@
+"
+Una reaccion puede ser un like o dislike.
+"
 Class {
 	#name : #Reaccion,
 	#superclass : #Object,
