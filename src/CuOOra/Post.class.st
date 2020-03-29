@@ -34,6 +34,16 @@ Post >> cantLikes [
 	^ reacciones collect: [ :reacion | reacion soyLike  ] size
 ]
 
+{ #category : #methods }
+Post >> darDislike [
+reacciones add: (Dislike new)
+]
+
+{ #category : #methods }
+Post >> darLike [
+	reacciones add: (Like new).
+]
+
 { #category : #accesing }
 Post >> descripcion [
 	^ descripcion.
@@ -76,6 +86,16 @@ Post >> ponerInactivo [
 { #category : #accesing }
 Post >> reacciones [
 	^reacciones.
+]
+
+{ #category : #methods }
+Post >> sacarDislike [
+	
+]
+
+{ #category : #methods }
+Post >> sacarLike [
+	
 ]
 
 { #category : #methods }
