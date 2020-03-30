@@ -61,7 +61,7 @@ Usuario >> contrasenia: anObject [
 
 { #category : #methods }
 Usuario >> darDislike: unPost [
-
+	unPost darDislike: self.
 ]
 
 { #category : #methods }
@@ -121,12 +121,12 @@ Usuario >> obtenerRespuestas [
 
 { #category : #methods }
 Usuario >> sacarDislike: unPost [
-
+	unPost sacarDislike: self
 ]
 
 { #category : #methods }
 Usuario >> sacarLike: unPost [
-
+	unPost sacarLike: self.
 ]
 
 { #category : #methods }

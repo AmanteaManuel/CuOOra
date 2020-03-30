@@ -17,8 +17,8 @@ Reaccion >> soyLike [
 ]
 
 { #category : #methods }
-Reaccion >> tieneLikeDe:usuarioObj [
-	^ (self usuario = usuarioObj).
+Reaccion >> tieneReaccionDe: usuarioObj [
+	^ self usuario = usuarioObj
 ]
 
 { #category : #accesing }
