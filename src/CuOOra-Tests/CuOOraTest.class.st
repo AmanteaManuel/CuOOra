@@ -50,7 +50,7 @@ CuOOraTest >> setUp [
 { #category : #test }
 CuOOraTest >> testAltaFollow [
 
-	self flag: #toImplement.
+	self flag: #toImplement. 
 	self assert: false
 ]
 
@@ -60,7 +60,7 @@ CuOOraTest >> testAltaPreguntaDescripcionTopicos [
 	"como regla de negocio el topico ya debe estar cargado en el sistema."
 	p:= sistema altaPregunta: 'collect pharo' descripcion:'no anda'  topicos:'pharo'.
 	self assert: [sistema preguntas includes:p].
-	self assert: [sistema usuarioLogueado posts includes:p].
+	self assert: [sistema usuarioLogueado posts includes:p]. 
 	
 	
 ]
