@@ -85,10 +85,6 @@ Post >> hora: time [
 	hora:= time.
 ]
 
-{ #category : #initialization }
-Post >> initialize [
-]
-
 { #category : #methods }
 Post >> ponerInactivo [
 	self activo: false.
