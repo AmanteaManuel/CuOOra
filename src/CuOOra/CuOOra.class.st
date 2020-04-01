@@ -25,8 +25,8 @@ CuOOra >> altaFollow:user [
 ]
 
 { #category : #methods }
-CuOOra >> altaLike:post [
-	post altaLike: usuarioLogueado. 
+CuOOra >> altaLike: post [
+	post darLike: usuarioLogueado
 ]
 
 { #category : #methods }
