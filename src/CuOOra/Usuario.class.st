@@ -111,7 +111,7 @@ Usuario >> nombreUsuario: anObject [
 
 { #category : #methods }
 Usuario >> obtenerPreguntas [
-	^(posts collect: [:pregunta | pregunta soyPregunta ]).
+	^ (posts collect: [ :pregunta | pregunta soyPregunta ])
 ]
 
 { #category : #methods }

@@ -13,12 +13,14 @@ Class {
 { #category : #running }
 UsuarioTest >> setUp [
 	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
-	usuario posts add:( Pregunta
-		newPregunta: 'select?'
-		descripcion: 'como se hace un select'
-		topicos: 'SQL').
-
- 
+	usuario posts
+		add:
+			(Pregunta
+				newPregunta: 'select?'
+				descripcion: 'como se hace un select'
+				topicos: 'SQL').
+	usuario posts
+		add: (Respuesta newRespuesta: 'esta mal escrito el metodo')
 ]
 
 { #category : #test }
@@ -45,5 +47,5 @@ UsuarioTest >> testAgregarRespuesta [
 
 { #category : #test }
 UsuarioTest >> testObtenerPreguntas [
-	self assert:( usuario obtenerPreguntas size = 1) 
+	self assert: (usuario obtenerPreguntas size = 1)
 ]
