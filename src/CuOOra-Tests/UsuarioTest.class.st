@@ -34,6 +34,16 @@ UsuarioTest >> testAgregarPregunta [
 ]
 
 { #category : #test }
+UsuarioTest >> testAgregarRespuesta [
+|resp|
+	resp:= usuario posts add:( Respuesta
+		newRespuesta:'te falta el ;' ).
+ 
+	usuario agregarRespuesta:  resp.
+	self assert: (usuario posts includes:resp).
+]
+
+{ #category : #test }
 UsuarioTest >> testObtenerPreguntas [
 	self assert:( usuario obtenerPreguntas size = 1) 
 ]

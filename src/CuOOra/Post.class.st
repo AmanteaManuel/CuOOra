@@ -99,6 +99,11 @@ Post >> reacciones [
 	^reacciones.
 ]
 
+{ #category : #accesing }
+Post >> reacciones: list [.
+	reacciones:= list.
+]
+
 { #category : #methods }
 Post >> sacarReaccion: usuarioObj [
 	"Saca la reaccion, tiene como precondicion que  la reaccion existe
