@@ -40,16 +40,6 @@ Pregunta >> perteneceATopico:unTopico [
 ]
 
 { #category : #accesing }
-Pregunta >> reacciones [ 
-	^ reacciones.
-]
-
-{ #category : #accesing }
-Pregunta >> reacciones: list [
-	reacciones:= list.
-]
-
-{ #category : #accesing }
 Pregunta >> respuestas [
 	^ respuestas.
 ]

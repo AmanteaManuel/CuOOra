@@ -19,10 +19,8 @@ Respuesta class >> newRespuesta:descripcionStr [
 { #category : #initialization }
 Respuesta >> initialize [
 	self
-		activo: true;
-		fecha: Date today;
-		hora: Time now;
-		reacciones: OrderedCollection new
+		activo: true; fecha: Date today; hora: Time now; 
+		reacciones: OrderedCollection new.
 ]
 
 { #category : #methods }
