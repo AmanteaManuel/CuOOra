@@ -18,7 +18,7 @@ UsuarioTest >> setUp [
 		descripcion: 'como se hace un select'
 		topicos: 'SQL').
 
-
+ 
 ]
 
 { #category : #test }
@@ -28,12 +28,12 @@ UsuarioTest >> testAgregarPregunta [
 		newPregunta: 'select?'
 		descripcion: 'como se hace un select'
 		topicos: 'SQL').
-
+ 
 	usuario agregarPregunta: preg.
 	self assert: (usuario posts includes:preg).
 ]
 
 { #category : #test }
 UsuarioTest >> testObtenerPreguntas [
-	self assert:( usuario obtenerPreguntas size = 1)
+	self assert:( usuario obtenerPreguntas size = 1) 
 ]

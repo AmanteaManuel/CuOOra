@@ -14,7 +14,7 @@ Class {
 CuOOraTest >> setUp [
 	| usuario pregunta topico |
 	sistema := CuOOra new.
-	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
+	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'. 
 	sistema usuarios add: usuario.
 	sistema usuarioLogueado: usuario.
 	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
@@ -49,7 +49,7 @@ CuOOraTest >> setUp [
 
 { #category : #test }
 CuOOraTest >> testAltaFollow [
-
+ 
 	self flag: #toImplement. 
 	self assert: false
 ]
@@ -57,7 +57,7 @@ CuOOraTest >> testAltaFollow [
 { #category : #test }
 CuOOraTest >> testAltaPreguntaDescripcionTopicos [
 	|p|
-	"como regla de negocio el topico ya debe estar cargado en el sistema."
+	"como regla de negocio el topico ya debe estar cargado en el sistema." 
 	p:= sistema altaPregunta: 'collect pharo' descripcion:'no anda'  topicos:'pharo'.
 	self assert: [sistema preguntas includes:p].
 	self assert: [sistema usuarioLogueado posts includes:p]. 
