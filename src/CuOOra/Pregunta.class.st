@@ -28,7 +28,7 @@ Pregunta >> initialize [
 	self
 		activo: true; 
 		fecha: Date today; 
-		hora: Date today hour;
+		hora: Time now;
 		reacciones: OrderedCollection new; 
 		respuestas: OrderedCollection new.
 		

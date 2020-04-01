@@ -35,6 +35,7 @@ CuOOra >> altaPregunta:tituloStr descripcion:descripcionStr topicos:topicosList 
 	p := Pregunta newPregunta: tituloStr descripcion:descripcionStr topicos:topicosList.
 	usuarioLogueado agregarPregunta:p.
 	preguntas add: p.
+	^p.
 	
 ]
 
@@ -60,9 +61,12 @@ CuOOra >> altaTopicoInteres: topicoObj [
 
 { #category : #methods }
 CuOOra >> altaUsuario: nombreStr contrasenia: contraseniaStr [
+	|u|
 	(self existeNombreUsuario: nombreStr)
 		ifTrue: [ ^ self ].
-	usuarios add: (Usuario newNombreUsuario: nombreStr contrasenia: contraseniaStr).
+		u:= (Usuario newNombreUsuario: nombreStr contrasenia: contraseniaStr).
+		usuarios add: u.
+		^u.
 ]
 
 { #category : #methods }
@@ -78,6 +82,13 @@ CuOOra >> calcularPuntajeUsuario:unUsuario [
 { #category : #methods }
 CuOOra >> existeNombreUsuario:nombreStr [
 	^ ( usuarios includes: [ :user | user nombre == nombreStr ]).
+]
+
+{ #category : #methods }
+CuOOra >> initialize [
+	usuarios:= OrderedCollection new. 
+	topicos := OrderedCollection new.
+	preguntas:= OrderedCollection new.
 ]
 
 { #category : #methods }

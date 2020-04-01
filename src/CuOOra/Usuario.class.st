@@ -119,6 +119,16 @@ Usuario >> obtenerRespuestas [
 	^ posts collect: [ :pregunta | pregunta soyPregunta not ]
 ]
 
+{ #category : #accessing }
+Usuario >> posts [
+	^ posts
+]
+
+{ #category : #accessing }
+Usuario >> posts: anObject [
+	posts := anObject
+]
+
 { #category : #methods }
 Usuario >> sacarDislike: unPost [
 	unPost sacarDislike: self
