@@ -1,32 +1,5 @@
 "
-Please comment me using the following template inspired by Class Responsibility Collaborator (CRC) design:
-
-For the Class part:  State a one line summary. For example, ""I represent a paragraph of text"".
-
-For the Responsibility part: Three sentences about my main responsibilities - what I do, what I know.
-
-For the Collaborators Part: State my main collaborators and one line about how I interact with them. 
-
-Public API and Key Messages
-
-- message one   
-- message two 
-- (for bonus points) how to create instances.
-
-   One simple example is simply gorgeous.
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	contrasenia:		<Object>
-	fechaHora:		<Object>
-	follows:		<Object>
-	nombreUsuario:		<Object>
-	posts:		<Object>
-	topicosDeInteres:		<Object>
-
-
-    Implementation Points
+""Clase usuario""
 "
 Class {
 	#name : #Usuario,
@@ -60,16 +33,6 @@ Usuario >> agregarRespuesta: unaRespuesta [
 ]
 
 { #category : #methods }
-Usuario >> agregarRespuesta: descripcionStr pregunta: unaPregunta [
-	posts add: (Respuesta new: descripcionStr)
-	
-]
-
-{ #category : #methods }
-Usuario >> agregarTopico: unNombre descripcion: unaDescripcion [
-]
-
-{ #category : #methods }
 Usuario >> agregarTopicoInteres: unTopico [
 	topicosDeInteres add: unTopico.
 ]
@@ -98,20 +61,20 @@ Usuario >> contrasenia: anObject [
 
 { #category : #methods }
 Usuario >> darDislike: unPost [
-
+	unPost darDislike: self.
 ]
 
 { #category : #methods }
 Usuario >> darLike: unPost [
-	unPost darLike.
+	unPost darLike: self
 ]
 
 { #category : #methods }
 Usuario >> diferenciaLikeDislikesPreguntas [
 	| preguntas cantLikes cantDislikes |
 	preguntas := self obtenerPreguntas.
-	cantLikes := preguntas collect: [ :preg | preg cantLikes ].
-	cantDislikes := preguntas collect: [ :preg | preg cantDislikes ].
+	cantLikes := preguntas sum: [ :preg | preg cantLikes ].
+	cantDislikes := preguntas sum: [ :preg | preg cantDislikes ].
 	^ cantLikes - cantDislikes
 ]
 
@@ -119,16 +82,18 @@ Usuario >> diferenciaLikeDislikesPreguntas [
 Usuario >> diferenciaLikeDislikesRespuestas [
 	| respuestas cantLikes cantDislikes |
 	respuestas := self obtenerRespuestas.
-	cantLikes := respuestas collect: [ :preg | preg cantLikes ].
-	cantDislikes := respuestas collect: [ :preg | preg cantDislikes ].
+	cantLikes := respuestas sum: [ :preg | preg cantLikes ].
+	cantDislikes := respuestas sum: [ :preg | preg cantDislikes ].
 	^ cantLikes - cantDislikes
 ]
 
 { #category : #methods }
 Usuario >> eliminarPregunta: unaPregunta [
-	"hace baja logica"
-	(self obtenerPreguntas detect: [ :preg | preg = unaPregunta ]) ponerInactivo 
-	
+	"hace baja logica de una pregunta determinada"
+
+	self obtenerPreguntas
+		detect: [ :preg | preg = unaPregunta ] ponerInactivo
+		ifNone: [ ^ self ]
 ]
 
 { #category : #initialization }
@@ -156,12 +121,12 @@ Usuario >> obtenerRespuestas [
 
 { #category : #methods }
 Usuario >> sacarDislike: unPost [
-
+	unPost sacarDislike: self
 ]
 
 { #category : #methods }
 Usuario >> sacarLike: unPost [
-
+	unPost sacarLike: self.
 ]
 
 { #category : #methods }

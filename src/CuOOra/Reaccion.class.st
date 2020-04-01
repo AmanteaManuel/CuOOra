@@ -1,3 +1,6 @@
+"
+Una reaccion puede ser un like o dislike.
+"
 Class {
 	#name : #Reaccion,
 	#superclass : #Object,
@@ -14,8 +17,8 @@ Reaccion >> soyLike [
 ]
 
 { #category : #methods }
-Reaccion >> tieneLikeDe:usuarioObj [
-	^ (self usuario = usuarioObj).
+Reaccion >> tieneReaccionDe: usuarioObj [
+	^ self usuario = usuarioObj
 ]
 
 { #category : #accesing }

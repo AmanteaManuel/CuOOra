@@ -35,13 +35,24 @@ Post >> cantLikes [
 ]
 
 { #category : #methods }
-Post >> darDislike [
-reacciones add: (Dislike new)
+Post >> darDislike: usuarioObj [
+	(self tieneDislikeDe: usuarioObj)
+		ifTrue: [ ^ self ]
+		ifFalse: [ (self tieneLikeDe: usuarioObj)
+				ifTrue: [ self sacarReaccion: usuarioObj ].
+			reacciones add: (Dislike new: usuarioObj) ]
 ]
 
 { #category : #methods }
-Post >> darLike [
-	reacciones add: (Like new).
+Post >> darLike: usuarioObj [
+	"Si el post tiene like, retorna self. 
+Si el post tiene dislike o no tiene nada, agrega el like"
+
+	(self tieneLikeDe: usuarioObj)
+		ifTrue: [ ^ self ]
+		ifFalse: [ (self tieneDislikeDe: usuarioObj)
+				ifTrue: [ self sacarReaccion: usuarioObj ].
+			reacciones add: (Like new: usuarioObj) ]
 ]
 
 { #category : #accesing }
@@ -89,16 +100,31 @@ Post >> reacciones [
 ]
 
 { #category : #methods }
-Post >> sacarDislike [
-	
-]
+Post >> sacarReaccion: usuarioObj [
+	"Saca la reaccion, tiene como precondicion que  la reaccion existe
+	y que se sabe cual es su tipo. 
+	"
 
-{ #category : #methods }
-Post >> sacarLike [
-	
+	| reacc |
+	reacc := reacciones detect: [ :r | r tieneReaccionDe: usuarioObj ].
+	reacciones remove: reacc
 ]
 
 { #category : #methods }
 Post >> soyPregunta [
  ^ self subclassResponsibility.
+]
+
+{ #category : #methods }
+Post >> tieneDislikeDe: usuarioObj [
+	| dislikes |
+	dislikes := reacciones detect: [ :r | r soyLike not ].
+	^ dislikes detect: [ :l | l tieneReaccionDe: usuarioObj ]
+]
+
+{ #category : #methods }
+Post >> tieneLikeDe: usuarioObj [
+	| likes |
+	likes := reacciones detect: [ :r | r soyLike ].
+	^ likes detect: [ :l | l tieneReaccionDe: usuarioObj ]
 ]
