@@ -105,6 +105,11 @@ Usuario >> initialize [
 ]
 
 { #category : #accessing }
+Usuario >> nombreUsuario [
+	^ nombreUsuario
+]
+
+{ #category : #accessing }
 Usuario >> nombreUsuario: anObject [
 	nombreUsuario := anObject
 ]

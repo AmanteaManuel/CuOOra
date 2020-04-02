@@ -48,10 +48,11 @@ CuOOra >> altaRespuesta:descripcionStr pregunta:preguntaObj [
 ]
 
 { #category : #methods }
-CuOOra >> altaTopico:nombreStr descripcion:descripcionStr [
-	(self validarTopico:nombreStr)
-		ifTrue: [^ self].
-	topicos add: (Topico newTopico:nombreStr descripcion:descripcionStr).
+CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
+	(self validarTopico: nombreStr)
+		ifNotNil: [ ^ self ].
+	^ topicos
+		add: (Topico newTopico: nombreStr descripcion: descripcionStr)
 ]
 
 { #category : #methods }
@@ -80,8 +81,8 @@ CuOOra >> calcularPuntajeUsuario:unUsuario [
 ]
 
 { #category : #methods }
-CuOOra >> existeNombreUsuario:nombreStr [
-	^ ( usuarios includes: [ :user | user nombre == nombreStr ]).
+CuOOra >> existeNombreUsuario: nombreStr [
+	^ usuarios anySatisfy: [ :user | user nombreUsuario = nombreStr ]
 ]
 
 { #category : #methods }
@@ -147,6 +148,7 @@ CuOOra >> usuarios: anObject [
 ]
 
 { #category : #methods }
-CuOOra >> validarTopico:nombreStr [
-	^ (topicos detect: [ :topico | topico existeNombre:nombreStr ]).
+CuOOra >> validarTopico: nombreStr [
+	^ topicos detect: [ :topico | topico existeNombre: nombreStr ]
+	ifNone: [ ^nil ]
 ]

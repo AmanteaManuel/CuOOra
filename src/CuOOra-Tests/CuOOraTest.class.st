@@ -12,9 +12,9 @@ Class {
 
 { #category : #running }
 CuOOraTest >> setUp [
-	| usuario pregunta topico |
+	| usuario pregunta topico t1 t2 t3 |
 	sistema := CuOOra new.
-	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'. 
+	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	sistema usuarioLogueado: usuario.
 	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
@@ -22,27 +22,27 @@ CuOOraTest >> setUp [
 	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	"-----------------------------------------------------------"
+	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
+	sistema topicos add: t1.
+	t2 := Topico newTopico: 'Smalltalk' descripcion: 'prueba'.
+	sistema topicos add: t2.
+	t3 := Topico newTopico: 'POO' descripcion: 'prueba'.
+	sistema topicos add: t3.
+	"-----------------------------------------------------------"
 	pregunta := Pregunta
 		newPregunta: 'select?'
 		descripcion: 'como se hace un select'
-		topicos: 'SQL'.
+		topicos: sistema topicos.
 	sistema preguntas add: pregunta.
 	pregunta := Pregunta
 		newPregunta: 'OrederedCollection?'
 		descripcion: 'como screo una instacia?'
-		topicos: 'Smalltalk'.
+		topicos: sistema topicos.
 	sistema preguntas add: pregunta.
 	pregunta := Pregunta
 		newPregunta: 'polimorfismo'
 		descripcion: 'alguien me puede explicar esto?'
-		topicos: 'POO'.
-	sistema preguntas add: pregunta.
-	"-----------------------------------------------------------"
-	topico := Topico newTopico: 'SQL' descripcion: 'prueba'.
-	sistema preguntas add: pregunta.
-	topico := Topico newTopico: 'Smalltalk' descripcion: 'prueba'.
-	sistema preguntas add: pregunta.
-	topico := Topico newTopico: 'POO' descripcion: 'prueba'.
+		topicos: sistema topicos.
 	sistema preguntas add: pregunta
 	"-----------------------------------------------------------"
 ]
@@ -63,4 +63,43 @@ CuOOraTest >> testAltaPreguntaDescripcionTopicos [
 	self assert: [sistema usuarioLogueado posts includes:p]. 
 	
 	
+]
+
+{ #category : #test }
+CuOOraTest >> testAltaRespuestaPregunta [
+
+]
+
+{ #category : #test }
+CuOOraTest >> testAltaTopicoDescripcion [
+	| t |
+	t := sistema altaTopico: 'Programacion' descripcion: 'prueba'.
+	self assert: (sistema topicos includes: t).
+	"Pruebo con un topico que no exista."
+	t := sistema altaTopico: 'SQL' descripcion: 'prueba'.
+	self deny: (sistema topicos includes: t)
+]
+
+{ #category : #test }
+CuOOraTest >> testAltaUsuarioContrasenia [
+	| u |
+	u := sistema altaUsuario: 'usuarioNuevo' contrasenia: '123'.
+	self assert: (sistema usuarios includes: u).
+	u := sistema altaUsuario: 'cami' contrasenia: '123'.
+	self deny: (sistema usuarios includes: u)
+]
+
+{ #category : #test }
+CuOOraTest >> testBajaPregunta [
+	| p |
+	p := sistema preguntas last.
+	sistema bajaPregunta: p.
+	self deny: p activo
+]
+
+{ #category : #test }
+CuOOraTest >> testExisteNombreUsuario [
+
+	self flag: #toImplement.
+	self assert: false
 ]
