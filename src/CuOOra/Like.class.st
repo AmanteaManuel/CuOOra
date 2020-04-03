@@ -28,7 +28,7 @@ Class {
 
 { #category : #'instance creation' }
 Like class >> newLike: usuarioObj [
-	^ self new usuario: usuarioObj
+	^ (self new usuario: usuarioObj)
 ]
 
 { #category : #methods }

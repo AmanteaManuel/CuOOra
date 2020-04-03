@@ -34,19 +34,22 @@ Usuario >> agregarRespuesta: unaRespuesta [
 
 { #category : #methods }
 Usuario >> agregarTopicoInteres: unTopico [
-	topicosDeInteres add: unTopico.
+	(self topicosInteres includes: unTopico)
+	ifFalse:[
+		topicosDeInteres add: unTopico].
 ]
 
 { #category : #methods }
 Usuario >> calcularPuntaje [
-	^ self obtenerPreguntas size * 20
-		+ (self obtenerRespuestas size * 50)
-		+ self diferenciaLikeDislikesPreguntas + self diferenciaLikeDislikesRespuestas 
+	^ self cantidadPreguntas  * 20
+		+ (self cantidadRespuestas * 50)
+		+ self diferenciaLikeDislikesPreguntas
+		+ self diferenciaLikeDislikesRespuestas
 ]
 
 { #category : #methods }
 Usuario >> cantidadPreguntas [
-	self obtenerPreguntas size.
+	^(self obtenerRespuestas size)
 ]
 
 { #category : #methods }
@@ -91,9 +94,7 @@ Usuario >> diferenciaLikeDislikesRespuestas [
 Usuario >> eliminarPregunta: unaPregunta [
 	"hace baja logica de una pregunta determinada"
 
-	self obtenerPreguntas
-		detect: [ :preg | preg = unaPregunta ] ponerInactivo
-		ifNone: [ ^ self ]
+	self obtenerPreguntas remove: unaPregunta.
 ]
 
 { #category : #initialization }
@@ -116,12 +117,12 @@ Usuario >> nombreUsuario: anObject [
 
 { #category : #methods }
 Usuario >> obtenerPreguntas [
-	^ (posts collect: [ :pregunta | pregunta soyPregunta ])
+	^ posts select: [ :pregunta | pregunta soyPregunta ]
 ]
 
 { #category : #methods }
 Usuario >> obtenerRespuestas [
-	^ posts collect: [ :pregunta | pregunta soyPregunta not ]
+	^ posts select: [ :pregunta | pregunta soyPregunta not ]
 ]
 
 { #category : #accessing }

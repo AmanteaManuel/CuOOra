@@ -25,3 +25,8 @@ Reaccion >> tieneReaccionDe: usuarioObj [
 Reaccion >> usuario [
 	^usuario.
 ]
+
+{ #category : #accessing }
+Reaccion >> usuario: anObject [
+	usuario := anObject
+]
