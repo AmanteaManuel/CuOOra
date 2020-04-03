@@ -40,10 +40,11 @@ CuOOra >> altaPregunta:tituloStr descripcion:descripcionStr topicos:topicosList 
 ]
 
 { #category : #methods }
-CuOOra >> altaRespuesta:descripcionStr pregunta:preguntaObj [
-	|r|
-	r := Respuesta newRespuesta:descripcionStr.
+CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj [
+	| r |
+	r := Respuesta newRespuesta: descripcionStr.
 	preguntaObj agregarRespuesta: r.
+	^r.
 	"DEBERIAMOS DE AGREGARO LOS OBJETOS CAMBIADOS A LA LISTA OTRA VEZ????"
 ]
 

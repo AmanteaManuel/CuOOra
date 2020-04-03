@@ -12,7 +12,7 @@ Class {
 
 { #category : #running }
 CuOOraTest >> setUp [
-	| usuario pregunta topico t1 t2 t3 |
+	| usuario pregunta t1 t2 t3 |
 	sistema := CuOOra new.
 	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	sistema usuarios add: usuario.
@@ -49,9 +49,19 @@ CuOOraTest >> setUp [
 
 { #category : #test }
 CuOOraTest >> testAltaFollow [
- 
-	self flag: #toImplement. 
-	self assert: false
+	| u |
+	sistema usuarioLogueado: sistema usuarios first.
+	u := sistema usuarios last.
+	sistema altaFollow: u.
+	self assert: (sistema usuarioLogueado sigueAUsuario: u).
+]
+
+{ #category : #test }
+CuOOraTest >> testAltaLike [
+	| p like |
+	p := sistema preguntas last.
+	like := sistema altaLike: p.
+	self assert: (p reacciones includes: like).
 ]
 
 { #category : #test }
@@ -67,7 +77,10 @@ CuOOraTest >> testAltaPreguntaDescripcionTopicos [
 
 { #category : #test }
 CuOOraTest >> testAltaRespuestaPregunta [
-
+	| p r |
+	p := sistema preguntas first.
+	r :=sistema altaRespuesta: 'La solucion es...' pregunta: p.
+	self assert: (p respuestas includes: r)
 ]
 
 { #category : #test }
@@ -75,7 +88,7 @@ CuOOraTest >> testAltaTopicoDescripcion [
 	| t |
 	t := sistema altaTopico: 'Programacion' descripcion: 'prueba'.
 	self assert: (sistema topicos includes: t).
-	"Pruebo con un topico que no exista."
+	"Pruebo con un topico que ya exista."
 	t := sistema altaTopico: 'SQL' descripcion: 'prueba'.
 	self deny: (sistema topicos includes: t)
 ]
@@ -99,7 +112,15 @@ CuOOraTest >> testBajaPregunta [
 
 { #category : #test }
 CuOOraTest >> testExisteNombreUsuario [
+	self assert: (sistema existeNombreUsuario:'cami').
+	self deny: (sistema existeNombreUsuario:'nombreDisponible').
+]
 
-	self flag: #toImplement.
-	self assert: false
+{ #category : #test }
+CuOOraTest >> testValidarTopico [
+	| list |
+	list := sistema validarTopico: 'Consultas'.
+	self assert: list isNil.
+	list := sistema validarTopico: 'SQL'.
+	self assert: list isNotNil
 ]
