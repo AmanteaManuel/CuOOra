@@ -155,6 +155,11 @@ Usuario >> sigueAUsuario: unUsuario [
 	^ follows includes: unUsuario
 ]
 
+{ #category : #accessing }
+Usuario >> topicosDeInteres [
+	^topicosDeInteres
+]
+
 { #category : #methods }
 Usuario >> topicosInteres [
 	^ topicosDeInteres 

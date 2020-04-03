@@ -52,7 +52,7 @@ Si el post tiene dislike o no tiene nada, agrega el like"
 		ifTrue: [ ^ self ]
 		ifFalse: [ (self tieneDislikeDe: usuarioObj)
 				ifTrue: [ self sacarReaccion: usuarioObj ].
-			reacciones add: (Like new: usuarioObj) ]
+			^reacciones add: (Like new: usuarioObj) ]
 ]
 
 { #category : #accesing }
@@ -120,12 +120,12 @@ Post >> soyPregunta [
 Post >> tieneDislikeDe: usuarioObj [
 	| dislikes |
 	dislikes := reacciones detect: [ :r | r soyLike not ].
-	^ dislikes detect: [ :l | l tieneReaccionDe: usuarioObj ]
+	^ dislikes anySatisfy: [ :l | l tieneReaccionDe: usuarioObj ]
 ]
 
 { #category : #methods }
 Post >> tieneLikeDe: usuarioObj [
 	| likes |
 	likes := reacciones detect: [ :r | r soyLike ].
-	^ likes detect: [ :l | l tieneReaccionDe: usuarioObj ]
+	^ likes anySatisfy:  [ :l | l tieneReaccionDe: usuarioObj ]
 ]

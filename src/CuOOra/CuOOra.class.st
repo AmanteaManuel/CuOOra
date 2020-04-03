@@ -58,7 +58,8 @@ CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 
 { #category : #methods }
 CuOOra >> altaTopicoInteres: topicoObj [
-	usuarioLogueado agregarTopicoInteres: topicoObj
+	usuarioLogueado agregarTopicoInteres: topicoObj.
+	^topicoObj
 ]
 
 { #category : #methods }

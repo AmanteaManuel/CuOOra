@@ -34,6 +34,7 @@ CuOOraTest >> setUp [
 		descripcion: 'como se hace un select'
 		topicos: sistema topicos.
 	sistema preguntas add: pregunta.
+	sistema usuarioLogueado posts add: pregunta.
 	pregunta := Pregunta
 		newPregunta: 'OrederedCollection?'
 		descripcion: 'como screo una instacia?'
@@ -45,6 +46,11 @@ CuOOraTest >> setUp [
 		topicos: sistema topicos.
 	sistema preguntas add: pregunta
 	"-----------------------------------------------------------"
+]
+
+{ #category : #test }
+CuOOraTest >> testAltaDislike [
+	self assert: false.
 ]
 
 { #category : #test }
@@ -94,6 +100,16 @@ CuOOraTest >> testAltaTopicoDescripcion [
 ]
 
 { #category : #test }
+CuOOraTest >> testAltaTopicoInteres [
+	| t |
+	"Toma el ultimo de los topicos de la lista, y lo agrega como topico de interes
+	del usuario."
+	t := sistema topicos last.
+	sistema altaTopicoInteres: t.
+	self assert: (sistema usuarioLogueado topicosDeInteres includes: t).
+]
+
+{ #category : #test }
 CuOOraTest >> testAltaUsuarioContrasenia [
 	| u |
 	u := sistema altaUsuario: 'usuarioNuevo' contrasenia: '123'.
@@ -111,9 +127,31 @@ CuOOraTest >> testBajaPregunta [
 ]
 
 { #category : #test }
+CuOOraTest >> testCalcularPuntajeUsuario [
+	self assert: false
+]
+
+{ #category : #test }
 CuOOraTest >> testExisteNombreUsuario [
 	self assert: (sistema existeNombreUsuario:'cami').
 	self deny: (sistema existeNombreUsuario:'nombreDisponible').
+]
+
+{ #category : #test }
+CuOOraTest >> testObtenerPreguntasRelevantesUsuario [
+	self assert: (sistema usuarioLogueado obtenerPreguntas size) equals: 3
+]
+
+{ #category : #test }
+CuOOraTest >> testObtenerPreguntasUsuario [
+	|cant|
+	cant := sistema usuarioLogueado cantidadPreguntas.
+	self assert: (cant equals: 1)
+]
+
+{ #category : #test }
+CuOOraTest >> testObtenerRespuestasUsuario [
+	self assert: false
 ]
 
 { #category : #test }
