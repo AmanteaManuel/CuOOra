@@ -90,6 +90,11 @@ UsuarioTest >> testCantidadPreguntas [
 ]
 
 { #category : #test }
+UsuarioTest >> testCantidadRespuestas [
+	self assert: [ usuario cantidadRespuestas = 1 ]
+]
+
+{ #category : #test }
 UsuarioTest >> testDiferenciaLikeDislikesPreguntas [
 	self assert: [usuario diferenciaLikeDislikesPreguntas = 0].
 ]
