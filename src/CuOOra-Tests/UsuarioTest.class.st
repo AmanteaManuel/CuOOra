@@ -33,6 +33,7 @@ UsuarioTest >> setUp [
 	p reacciones add: like.
 	dislike := Dislike newDislike: u3.
 	p reacciones add: dislike.
+	dislike := Dislike newDislike: u3.
 	r reacciones add: dislike.
 	u1 posts add: p.
 	u1 posts add: r.
@@ -95,7 +96,9 @@ UsuarioTest >> testDiferenciaLikeDislikesPreguntas [
 
 { #category : #test }
 UsuarioTest >> testDiferenciaLikeDislikesRespuestas [
-	self assert: [ -1 = (usuario diferenciaLikeDislikesRespuestas) ]
+	| dif |
+	dif := usuario diferenciaLikeDislikesRespuestas.
+	self assert: [ dif = -1 ]
 ]
 
 { #category : #test }
@@ -112,9 +115,9 @@ UsuarioTest >> testEliminarPregunta [
 
 { #category : #test }
 UsuarioTest >> testObtenerPreguntas [
-	|list|
-	list:= usuario obtenerPreguntas.
-	self assert: [list size = 2].
+	| list |
+	list := usuario obtenerPreguntas.
+	self assert: [ list size = 1 ]
 ]
 
 { #category : #test }
@@ -126,11 +129,11 @@ UsuarioTest >> testObtenerRespuestas [
 
 { #category : #test }
 UsuarioTest >> testSeguirUsuario [
-	|u1|
-	u1:= Usuario newNombreUsuario: 'Manuel' contrasenia: '123'.
-	usuario agregarFollow:u1.
+	| u1 |
+	u1 := Usuario newNombreUsuario: 'Manuel' contrasenia: '123'.
+	usuario agregarFollow: u1.
 	usuario seguirUsuario: u1.
-	self assert:[1 = [ usuario follows select:[ :f | f  = u1] size]].
+	self assert: (1 = (usuario follows select: [ :f | f = u1] )size ).
 ]
 
 { #category : #test }

@@ -26,12 +26,12 @@ Post >> activo: bool [
 
 { #category : #methods }
 Post >> cantDislikes [
-	^ (reacciones collect: [ :reacion | reacion soyLike not ] )size
+	^ (reacciones select: [ :reacion | reacion soyLike not ]) size
 ]
 
 { #category : #methods }
 Post >> cantLikes [
-	^ (reacciones collect: [ :reacion | reacion soyLike ] )size
+	^ (reacciones select: [ :reacion | reacion soyLike ]) size
 ]
 
 { #category : #methods }

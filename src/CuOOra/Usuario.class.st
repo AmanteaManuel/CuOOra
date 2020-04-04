@@ -91,9 +91,9 @@ Usuario >> diferenciaLikeDislikesPreguntas [
 Usuario >> diferenciaLikeDislikesRespuestas [
 	| respuestas cantLikes cantDislikes |
 	respuestas := self obtenerRespuestas.
-	cantLikes := (respuestas select: [ :preg | preg cantLikes ])size.
-	cantDislikes := (respuestas select: [ :preg | preg cantDislikes ])size.
-	^ [cantLikes - cantDislikes]
+	cantLikes := respuestas sum: [ :resp | resp cantLikes ] .
+	cantDislikes := respuestas sum: [ :resp | resp cantDislikes ].
+	^ cantLikes - cantDislikes
 ]
 
 { #category : #methods }
@@ -164,7 +164,7 @@ Usuario >> sacarLike: unPost [
 { #category : #methods }
 Usuario >> seguirUsuario: unUsuario [
 	(self sigueAUsuario: unUsuario)
-		ifFalse: [ follows add: unUsuario ]
+		ifFalse: [ ^ follows add: unUsuario ]
 ]
 
 { #category : #methods }
