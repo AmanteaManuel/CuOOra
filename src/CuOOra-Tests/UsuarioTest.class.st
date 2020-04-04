@@ -81,7 +81,7 @@ UsuarioTest >> testAgregarTopicoInteres [
 
 { #category : #test }
 UsuarioTest >> testCalcularPuntaje [
-	self assert: [ 20 + 50 + 0 = usuario calcularPuntaje ]
+	self assert: [ 20 + 50 + 0 + (-1) = usuario calcularPuntaje ]
 ]
 
 { #category : #test }
@@ -96,9 +96,7 @@ UsuarioTest >> testDiferenciaLikeDislikesPreguntas [
 
 { #category : #test }
 UsuarioTest >> testDiferenciaLikeDislikesRespuestas [
-	| dif |
-	dif := usuario diferenciaLikeDislikesRespuestas.
-	self assert: [ dif = -1 ]
+	self assert: [ usuario diferenciaLikeDislikesRespuestas = -1 ]
 ]
 
 { #category : #test }

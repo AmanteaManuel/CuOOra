@@ -60,7 +60,7 @@ Usuario >> cantidadPreguntas [
 
 { #category : #methods }
 Usuario >> cantidadRespuestas [
-	self obtenerRespuestas size.
+	^ self obtenerRespuestas size
 ]
 
 { #category : #accessing }
