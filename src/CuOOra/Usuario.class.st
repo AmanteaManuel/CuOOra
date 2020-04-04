@@ -22,6 +22,12 @@ Usuario class >> newNombreUsuario: unNombreUsuario contrasenia: unaContrasenia [
 ]
 
 { #category : #methods }
+Usuario >> agregarFollow:user [
+	self follows add:user.
+	
+]
+
+{ #category : #methods }
 Usuario >> agregarPregunta: unaPregunta [
 	posts
 		add: unaPregunta
@@ -85,9 +91,9 @@ Usuario >> diferenciaLikeDislikesPreguntas [
 Usuario >> diferenciaLikeDislikesRespuestas [
 	| respuestas cantLikes cantDislikes |
 	respuestas := self obtenerRespuestas.
-	cantLikes := respuestas sum: [ :preg | preg cantLikes ].
-	cantDislikes := respuestas sum: [ :preg | preg cantDislikes ].
-	^ cantLikes - cantDislikes
+	cantLikes := (respuestas select: [ :preg | preg cantLikes ])size.
+	cantDislikes := (respuestas select: [ :preg | preg cantDislikes ])size.
+	^ [cantLikes - cantDislikes]
 ]
 
 { #category : #methods }
@@ -95,6 +101,16 @@ Usuario >> eliminarPregunta: unaPregunta [
 	"hace baja logica de una pregunta determinada"
 
 	self obtenerPreguntas remove: unaPregunta.
+]
+
+{ #category : #accessing }
+Usuario >> follows [
+	^ follows
+]
+
+{ #category : #accessing }
+Usuario >> follows: anObject [
+	follows := anObject
 ]
 
 { #category : #initialization }

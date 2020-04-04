@@ -6,8 +6,7 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'usuario',
-		'top',
-		'preguntaBorrar'
+		'top'
 	],
 	#category : #'CuOOra-Tests'
 }
@@ -34,13 +33,9 @@ UsuarioTest >> setUp [
 	p reacciones add: like.
 	dislike := Dislike newDislike: u3.
 	p reacciones add: dislike.
+	r reacciones add: dislike.
 	u1 posts add: p.
 	u1 posts add: r.
-	preguntaBorrar := Pregunta
-		newPregunta: 'delete?'
-		descripcion: 'como se hace un delte'
-		topicos: topicos.
-	u1 posts add: p.
 	usuario := u1
 ]
 
@@ -100,11 +95,17 @@ UsuarioTest >> testDiferenciaLikeDislikesPreguntas [
 
 { #category : #test }
 UsuarioTest >> testDiferenciaLikeDislikesRespuestas [
-	self assert: [ 20 + 50 + 0 = usuario calcularPuntaje ]
+	self assert: [ -1 = (usuario diferenciaLikeDislikesRespuestas) ]
 ]
 
 { #category : #test }
 UsuarioTest >> testEliminarPregunta [
+|preguntaBorrar|
+	preguntaBorrar := Pregunta
+		newPregunta: 'delete?'
+		descripcion: 'como se hace un delte'
+		topicos: (OrderedCollection new).
+		usuario agregarPregunta: preguntaBorrar.		
 	usuario eliminarPregunta: preguntaBorrar.
 	self assert: [ usuario posts includes: preguntaBorrar ].
 ]
@@ -124,27 +125,19 @@ UsuarioTest >> testObtenerRespuestas [
 ]
 
 { #category : #test }
-UsuarioTest >> testSacarDislike [
-
-	self assert: false
-]
-
-{ #category : #test }
-UsuarioTest >> testSacarLike [
-
-	self assert: false
-]
-
-{ #category : #test }
 UsuarioTest >> testSeguirUsuario [
-
-	self flag: #toImplement.
-	self assert: false
+	|u1|
+	u1:= Usuario newNombreUsuario: 'Manuel' contrasenia: '123'.
+	usuario agregarFollow:u1.
+	usuario seguirUsuario: u1.
+	self assert:[1 = [ usuario follows select:[ :f | f  = u1] size]].
 ]
 
 { #category : #test }
 UsuarioTest >> testSigueAUsuario [
-
-	self flag: #toImplement.
-	self assert: false
+	|u1|
+	u1:= Usuario newNombreUsuario: 'Manuel' contrasenia: '123'.
+	usuario agregarFollow:u1.
+	self assert:[ usuario sigueAUsuario:u1].
+	
 ]
