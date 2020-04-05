@@ -14,8 +14,8 @@ Class {
 }
 
 { #category : #methods }
-CuOOra >> altaDislike:post [
-	post darDislike:usuarioLogueado.
+CuOOra >> altaDislike: post [
+	^ post darDislike: usuarioLogueado
 ]
 
 { #category : #methods }
@@ -26,7 +26,7 @@ CuOOra >> altaFollow:user [
 
 { #category : #methods }
 CuOOra >> altaLike: post [
-	post darLike: usuarioLogueado
+	^ post darLike: usuarioLogueado
 ]
 
 { #category : #methods }
@@ -96,7 +96,7 @@ CuOOra >> initialize [
 
 { #category : #methods }
 CuOOra >> obtenerPreguntasRelevantesUsuario [
-	^( usuarioLogueado obtenerPreguntasRelevantesUsuario ).
+	^ usuarioLogueado obtenerPreguntasRelevantes
 ]
 
 { #category : #methods }

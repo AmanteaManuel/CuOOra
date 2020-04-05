@@ -40,7 +40,7 @@ Post >> darDislike: usuarioObj [
 		ifTrue: [ ^ self ]
 		ifFalse: [ (self tieneLikeDe: usuarioObj)
 				ifTrue: [ self sacarReaccion: usuarioObj ].
-			reacciones add: (Dislike new: usuarioObj) ]
+			^ reacciones add: (Dislike newDislike: usuarioObj) ]
 ]
 
 { #category : #methods }
@@ -52,7 +52,7 @@ Si el post tiene dislike o no tiene nada, agrega el like"
 		ifTrue: [ ^ self ]
 		ifFalse: [ (self tieneDislikeDe: usuarioObj)
 				ifTrue: [ self sacarReaccion: usuarioObj ].
-			^reacciones add: (Like new: usuarioObj) ]
+			^ reacciones add: (Like newLike: usuarioObj) ]
 ]
 
 { #category : #accesing }
@@ -119,13 +119,13 @@ Post >> soyPregunta [
 { #category : #methods }
 Post >> tieneDislikeDe: usuarioObj [
 	| dislikes |
-	dislikes := reacciones detect: [ :r | r soyLike not ].
+	dislikes := reacciones reject: [ :r | r soyLike ].
 	^ dislikes anySatisfy: [ :l | l tieneReaccionDe: usuarioObj ]
 ]
 
 { #category : #methods }
 Post >> tieneLikeDe: usuarioObj [
 	| likes |
-	likes := reacciones detect: [ :r | r soyLike ].
-	^ likes anySatisfy:  [ :l | l tieneReaccionDe: usuarioObj ]
+	likes := reacciones select: [ :r | r soyLike ].
+	^ likes anySatisfy: [ :l | l tieneReaccionDe: usuarioObj ]
 ]

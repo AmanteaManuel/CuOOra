@@ -124,6 +124,13 @@ UsuarioTest >> testObtenerPreguntas [
 ]
 
 { #category : #test }
+UsuarioTest >> testObtenerPreguntasRelevantes [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
 UsuarioTest >> testObtenerRespuestas [
 	|list|
 	list:= usuario obtenerRespuestas.
