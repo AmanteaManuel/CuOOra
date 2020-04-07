@@ -119,13 +119,13 @@ Post >> soyPregunta [
 { #category : #methods }
 Post >> tieneDislikeDe: usuarioObj [
 	| dislikes |
-	dislikes := reacciones detect: [ :r | r soyLike not ].
+	dislikes := reacciones select: [ :r | r soyLike not ].
 	^ dislikes anySatisfy: [ :l | l tieneReaccionDe: usuarioObj ]
 ]
 
 { #category : #methods }
 Post >> tieneLikeDe: usuarioObj [
 	| likes |
-	likes := reacciones detect: [ :r | r soyLike ].
+	likes := self reacciones select: [ :r | r soyLike ].
 	^ likes anySatisfy:  [ :l | l tieneReaccionDe: usuarioObj ]
 ]
