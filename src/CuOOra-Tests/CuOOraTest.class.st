@@ -13,16 +13,13 @@ Class {
 
 { #category : #running }
 CuOOraTest >> setUp [
-	| usuario pregunta t1 t2 t3 list|
+	| usuario pregunta t1 t2 t3 respuesta |
 	sistema := CuOOra new.
 	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	sistema usuarioLogueado: usuario.
-	
 	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
 	sistema usuarios add: usuario.
-	u1:= usuario.
-	
 	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	"-----------------------------------------------------------"
@@ -32,40 +29,35 @@ CuOOraTest >> setUp [
 	sistema topicos add: t2.
 	t3 := Topico newTopico: 'POO' descripcion: 'prueba'.
 	sistema topicos add: t3.
-	sistema usuarioLogueado agregarTopicoInteres: t1.
-	sistema usuarioLogueado agregarTopicoInteres: t2.
 	"-----------------------------------------------------------"
-	list:=OrderedCollection new.
-	list add:t1.
-	
 	pregunta := Pregunta
 		newPregunta: 'select?'
 		descripcion: 'como se hace un select'
-		topicos: list.
+		topicos: sistema topicos.
 	sistema preguntas add: pregunta.
 	sistema usuarioLogueado posts add: pregunta.
-	
-	list remove:t1.
-	list add:t2.
 	pregunta := Pregunta
 		newPregunta: 'OrederedCollection?'
 		descripcion: 'como screo una instacia?'
-		topicos: list.
+		topicos: sistema topicos.
 	sistema preguntas add: pregunta.
-	
-	list remove:t2.
-	list add:t3.
 	pregunta := Pregunta
 		newPregunta: 'polimorfismo'
 		descripcion: 'alguien me puede explicar esto?'
-		topicos: list.
-	sistema preguntas add: pregunta
+		topicos: sistema topicos.
+	sistema preguntas add: pregunta.
 	"-----------------------------------------------------------"
+	respuesta := Respuesta newRespuesta: 'La respuesta es...'.
+	pregunta respuestas add: respuesta.
+	sistema usuarioLogueado posts add: respuesta
 ]
 
 { #category : #test }
 CuOOraTest >> testAltaDislike [
-	self assert: false.
+	| p dislike |
+	p := sistema preguntas last.
+	dislike := sistema altaLike: p.
+	self assert: (p reacciones includes: dislike)
 ]
 
 { #category : #test }
@@ -147,7 +139,9 @@ CuOOraTest >> testBajaPregunta [
 
 { #category : #test }
 CuOOraTest >> testCalcularPuntajeUsuario [
-	self assert: false
+	| p |
+	p := sistema calcularPuntajeUsuario: sistema usuarioLogueado.
+	self assert: p equals: 20 * 1 + (50 * 1)
 ]
 
 { #category : #test }
@@ -158,19 +152,26 @@ CuOOraTest >> testExisteNombreUsuario [
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasRelevantesUsuario [
-	self assert: (sistema usuarioLogueado obtenerPreguntas size) equals: 2.
+	| t |
+	t := sistema topicos last.
+	sistema altaTopicoInteres: t.
+	self assert: sistema obtenerPreguntasRelevantesUsuario size equals: 1
 ]
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasUsuario [
-	|cant|
-	cant := sistema usuarioLogueado cantidadPreguntas.
-	self assert: cant equals: 1.
+	| u cantPreguntas |
+	u := sistema usuarioLogueado.
+	cantPreguntas := (sistema obtenerRespuestasUsuario: u) size.
+	self assert: [ cantPreguntas = 1 ]
 ]
 
 { #category : #test }
 CuOOraTest >> testObtenerRespuestasUsuario [
-	self assert: false
+	| u cantRespuestas |
+	u := sistema usuarioLogueado.
+	cantRespuestas := (sistema obtenerRespuestasUsuario: u) size.
+	self assert: [ cantRespuestas = 1 ]
 ]
 
 { #category : #test }

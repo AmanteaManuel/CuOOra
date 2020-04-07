@@ -23,6 +23,10 @@ Pregunta >> agregarRespuesta:respuestaObj [
 	respuestas add: respuestaObj.
 ]
 
+{ #category : #methods }
+Pregunta >> coincidenTopicos [
+]
+
 { #category : #initialization }
 Pregunta >> initialize [
 	self

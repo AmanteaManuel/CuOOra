@@ -113,6 +113,11 @@ Usuario >> follows: anObject [
 	follows := anObject
 ]
 
+{ #category : #methods }
+Usuario >> incluyeTopicos: unaPregunta [
+	^ topicosDeInteres detect: [ :t | unaPregunta topicos includes: t ]
+]
+
 { #category : #initialization }
 Usuario >> initialize [
 	fechaHora := DateAndTime now.
@@ -134,6 +139,13 @@ Usuario >> nombreUsuario: anObject [
 { #category : #methods }
 Usuario >> obtenerPreguntas [
 	^ posts select: [ :pregunta | pregunta soyPregunta ]
+]
+
+{ #category : #methods }
+Usuario >> obtenerPreguntasRelevantes [
+	| porTopico porFollow |
+	porTopico:= self obtenerPreguntas select: [ :preg | (self incluyeTopicos: preg) ].
+	porFollow := follows select: [ :f | f obtenerPreguntas  ]
 ]
 
 { #category : #methods }
@@ -170,6 +182,11 @@ Usuario >> seguirUsuario: unUsuario [
 { #category : #methods }
 Usuario >> sigueAUsuario: unUsuario [
 	^ follows includes: unUsuario
+]
+
+{ #category : #methods }
+Usuario >> tienePregunta: unaPregunta [
+^ self obtenerPreguntas anySatisfy: [ :preg | preg = unaPregunta ]
 ]
 
 { #category : #accessing }
