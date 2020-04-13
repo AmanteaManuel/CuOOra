@@ -11,3 +11,8 @@ Class {
 ManifestCuOOra class >> ruleRBSelfSentNotImplementedRuleV1FalsePositive [
 	^ #(#(#(#RGClassDefinition #(#Respuesta)) #'2020-03-29T15:34:25.919691-03:00') )
 ]
+
+{ #category : #'code-critics' }
+ManifestCuOOra class >> ruleRBStringConcatenationRuleV1FalsePositive [
+	^ #(#(#(#RGMethodDefinition #(#HomeComponent #renderContentOn: #false)) #'2020-04-13T17:56:51.725326-03:00') )
+]

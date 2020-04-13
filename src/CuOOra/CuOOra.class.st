@@ -140,6 +140,16 @@ CuOOra >> topicos: anObject [
 	topicos := anObject
 ]
 
+{ #category : #methods }
+CuOOra >> ultimasCincoRelevantes [
+	|p|
+	p:= usuarioLogueado obtenerPreguntasRelevantes.	
+	(p size > 5)
+	ifTrue: [ ^p last: 5 ]
+	ifFalse: [^p ]
+	
+]
+
 { #category : #accessing }
 CuOOra >> usuarioLogueado [
 	^ usuarioLogueado

@@ -23,6 +23,12 @@ Pregunta >> agregarRespuesta:respuestaObj [
 	respuestas add: respuestaObj.
 ]
 
+{ #category : #accesing }
+Pregunta >> cantidadRespuestas [
+
+	^(self respuestas size).
+]
+
 { #category : #methods }
 Pregunta >> coincidenTopicos [
 ]
