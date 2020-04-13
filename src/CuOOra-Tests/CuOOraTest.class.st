@@ -5,7 +5,8 @@ Class {
 	#name : #CuOOraTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'sistema'
+		'sistema',
+		'u1'
 	],
 	#category : #'CuOOra-Tests'
 }
@@ -70,10 +71,14 @@ CuOOraTest >> testAltaFollow [
 
 { #category : #test }
 CuOOraTest >> testAltaLike [
-	| p like |
-	p := sistema preguntas last.
-	like := sistema altaLike: p.
-	self assert: (p reacciones includes: like).
+	| p |
+	p := Pregunta
+		newPregunta: 'Select:?'
+		descripcion: 'Objetos'
+		topicos: sistema topicos.
+	sistema preguntas add: p.
+	sistema altaLike: p.
+	self assert: [p reacciones size = 1]
 ]
 
 { #category : #test }
