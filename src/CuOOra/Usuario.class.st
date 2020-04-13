@@ -64,6 +64,11 @@ Usuario >> cantidadRespuestas [
 ]
 
 { #category : #accessing }
+Usuario >> contrasenia [
+^contrasenia
+]
+
+{ #category : #accessing }
 Usuario >> contrasenia: anObject [
 	contrasenia := anObject
 ]
@@ -115,6 +120,8 @@ Usuario >> follows: anObject [
 
 { #category : #methods }
 Usuario >> incluyeTopicos: unaPregunta [
+	"si los topicos del usuario estan incluidos en una pregunta"
+
 	^ topicosDeInteres detect: [ :t | unaPregunta topicos includes: t ]
 ]
 

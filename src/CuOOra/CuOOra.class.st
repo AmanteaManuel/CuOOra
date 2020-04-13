@@ -95,8 +95,19 @@ CuOOra >> initialize [
 ]
 
 { #category : #methods }
+CuOOra >> nombreUsuario: unNombre contrasenia: contrasenia [
+	^ usuarios detect: [ :u | u nombreUsuario= unNombre & (u contrasenia = contrasenia) ]
+	ifNone: [ nil ]
+]
+
+{ #category : #methods }
 CuOOra >> obtenerPreguntasRelevantesUsuario [
 	^ usuarioLogueado obtenerPreguntasRelevantes
+]
+
+{ #category : #methods }
+CuOOra >> obtenerPreguntasRelevantesUsuario: unUsuario [
+	^ preguntas select: [ :p | p esDeInteresPara: unUsuario ].
 ]
 
 { #category : #methods }
