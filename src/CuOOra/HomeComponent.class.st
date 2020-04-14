@@ -49,7 +49,7 @@ HomeComponent >> renderContentOn: aCanvas [
 		level1;
 		with: 'CuOOra'.
 	aCanvas div id:'usuarioencabezado'; with: [ 
-		aCanvas render: 'Usuario: ', usuario nombreUsuario, ' '.
+		aCanvas render: 'Usuario: ', usuario nombreUsuario, ' '. 
 		aCanvas anchor
 			callback: [ ];
 			with: 'Log Out'.
