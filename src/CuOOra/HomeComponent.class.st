@@ -56,7 +56,9 @@ HomeComponent >> renderContentOn: aCanvas [
 	aCanvas break.
 "body"
 aCanvas heading	 with: 'Ultimas preguntas'. 
-	
+	aCanvas div id:'agregarPregunta';with:[ aCanvas button callback: [ ]; with: 'Hacer una nueva pregunta'].
+
+aCanvas horizontalRule.	
 	aCanvas
 		unorderedList: [ preguntas
 				do: [ :pregunta | 						
