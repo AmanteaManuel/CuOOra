@@ -8,7 +8,7 @@ Class {
 		'fechaHora',
 		'usuario'
 	],
-	#category : #CuOOra
+	#category : #'CuOOra-Model'
 }
 
 { #category : #initialization }

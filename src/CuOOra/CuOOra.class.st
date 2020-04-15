@@ -10,8 +10,17 @@ Class {
 		'topicos',
 		'preguntas'
 	],
-	#category : #CuOOra
+	#classInstVars : [
+		'soleInstance'
+	],
+	#category : #'CuOOra-Model'
 }
+
+{ #category : #'instance creation' }
+CuOOra class >> clearSoleInstance [
+	
+	soleInstance := nil
+]
 
 { #category : #methods }
 CuOOra >> altaDislike: post [
@@ -89,9 +98,11 @@ CuOOra >> existeNombreUsuario: nombreStr [
 
 { #category : #methods }
 CuOOra >> initialize [
-	usuarios:= OrderedCollection new. 
+	self halt.
+	usuarios := OrderedCollection new.
 	topicos := OrderedCollection new.
-	preguntas:= OrderedCollection new.
+	preguntas := OrderedCollection new.
+	self setearVariables
 ]
 
 { #category : #methods }
@@ -128,6 +139,17 @@ CuOOra >> preguntas [
 { #category : #accessing }
 CuOOra >> preguntas: anObject [
 	preguntas := anObject
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> setearVariables [
+	| u1 u2 |
+	u1 := self
+		altaUsuario: 'pedro@cuoora.com'
+		contrasenia: 'pedro@cuoora.com'.
+	u2 := self
+		altaUsuario: 'diego@cuoora.com'
+		contrasenia: 'diego@cuoora.com'
 ]
 
 { #category : #accessing }

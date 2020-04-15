@@ -12,7 +12,7 @@ Class {
 		'posts',
 		'follows'
 	],
-	#category : #CuOOra
+	#category : #'CuOOra-Model'
 }
 
 { #category : #'instance creation' }

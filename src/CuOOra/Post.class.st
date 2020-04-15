@@ -11,7 +11,7 @@ Class {
 		'activo',
 		'reacciones'
 	],
-	#category : #CuOOra
+	#category : #'CuOOra-Model'
 }
 
 { #category : #accesing }
