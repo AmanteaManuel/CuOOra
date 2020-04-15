@@ -45,9 +45,7 @@ HomeComponent >> preguntas: anObject [
 { #category : #rendering }
 HomeComponent >> renderContentOn: aCanvas [
 "header"
-	aCanvas heading
-		level1;
-		with: 'CuOOra'.
+	aCanvas heading	 with: 'CuOOra'.
 	aCanvas div id:'usuarioencabezado'; with: [ 
 		aCanvas render: 'Usuario: ', usuario nombreUsuario, ' '. 
 		aCanvas anchor
@@ -57,6 +55,8 @@ HomeComponent >> renderContentOn: aCanvas [
 	aCanvas horizontalRule.	
 	aCanvas break.
 "body"
+aCanvas heading	 with: 'Ultimas preguntas'. 
+	
 	aCanvas
 		unorderedList: [ preguntas
 				do: [ :pregunta | 						
@@ -72,8 +72,8 @@ HomeComponent >> renderContentOn: aCanvas [
 						aCanvas render: (pregunta cantidadRespuestas printString) , ' Respuestas'.
 						].
 						aCanvas paragraph: [
-						aCanvas render: 'Cantidad likes ', (pregunta cantLikes printString) , ' | ',
-											 'Cantidad disLikes ', (pregunta cantDislikes printString)
+						aCanvas render: 'Cantidad Likes ', (pregunta cantLikes printString) , ' | ',
+											 'Cantidad Dislikes ', (pregunta cantDislikes printString)
 											].
 						aCanvas horizontalRule.					
 					] ].
@@ -83,4 +83,15 @@ HomeComponent >> renderContentOn: aCanvas [
 { #category : #accessing }
 HomeComponent >> renderPreguntaWith: unaPregunta [
 
+]
+
+{ #category : #accessing }
+HomeComponent >> style [
+	^ '
+	#usuarioencabezado{text-align:right;
+	}
+	
+	#agregarPregunta{text-align:right;
+	}
+	'
 ]
