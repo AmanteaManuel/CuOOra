@@ -22,6 +22,11 @@ CuOOra class >> clearSoleInstance [
 	soleInstance := nil
 ]
 
+{ #category : #'instance creation' }
+CuOOra class >> soleInstance [
+	^ soleInstance ifNil: [ soleInstance := self new ]
+]
+
 { #category : #methods }
 CuOOra >> altaDislike: post [
 	^ post darDislike: usuarioLogueado
@@ -98,7 +103,6 @@ CuOOra >> existeNombreUsuario: nombreStr [
 
 { #category : #methods }
 CuOOra >> initialize [
-	self halt.
 	usuarios := OrderedCollection new.
 	topicos := OrderedCollection new.
 	preguntas := OrderedCollection new.
@@ -145,11 +149,11 @@ CuOOra >> preguntas: anObject [
 CuOOra >> setearVariables [
 	| u1 u2 |
 	u1 := self
-		altaUsuario: 'pedro@cuoora.com'
-		contrasenia: 'pedro@cuoora.com'.
+		altaUsuario: 'manu'
+		contrasenia: '123'.
 	u2 := self
-		altaUsuario: 'diego@cuoora.com'
-		contrasenia: 'diego@cuoora.com'
+		altaUsuario: 'user'
+		contrasenia: '123'
 ]
 
 { #category : #accessing }

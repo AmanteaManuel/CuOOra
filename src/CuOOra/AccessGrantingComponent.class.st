@@ -9,9 +9,8 @@ Class {
 	#name : #AccessGrantingComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'usuario',
-		'contrasenia',
-		'model'
+		'nombreUsuario',
+		'contrasenia'
 	],
 	#category : #'CuOOra-ui'
 }
@@ -29,22 +28,33 @@ AccessGrantingComponent >> contrasenia: anObject [
 { #category : #accessing }
 AccessGrantingComponent >> initialize [
 	super initialize.
-	model := CuOOra new
 ]
 
 { #category : #rendering }
 AccessGrantingComponent >> login: anUser [
-	(model
+	(self model
 		nombreUsuario: anUser nombreUsuario
 		contrasenia: anUser contrasenia)
-		ifNotNil: [ :u | self proceedWith: u ].
-	usuario := nil.
-	contrasenia := nil
+		ifNotNil: [ :u | self proceedWith: u ].	
+	nombreUsuario := nil.
+	contrasenia := nil.
+	self call: (ErrorLoginComponent new)
+
+]
+
+{ #category : #model }
+AccessGrantingComponent >> model [
+	^ CuOOra soleInstance
 ]
 
 { #category : #accessing }
-AccessGrantingComponent >> model [
-	^ model.
+AccessGrantingComponent >> nombreUsuario [
+	^ nombreUsuario
+]
+
+{ #category : #accessing }
+AccessGrantingComponent >> nombreUsuario: anObject [
+	nombreUsuario := anObject
 ]
 
 { #category : #rendering }
@@ -59,29 +69,64 @@ AccessGrantingComponent >> registrarUsuario [
 ]
 
 { #category : #rendering }
-AccessGrantingComponent >> renderContentOn: aCanvas [
+AccessGrantingComponent >> renderBody: aCanvas [
 	| logueo |
 	logueo := Usuario new.
-	aCanvas
-		form: [ aCanvas text: 'Nombre de usuario'.
-			aCanvas textInput
-				callback: [ :value | logueo nombreUsuario: value ].
-			aCanvas break.
-			aCanvas text: 'Contraseña: '.
-			aCanvas textInput
-				callback: [ :value | logueo contrasenia: value ].
-			aCanvas break.
-			aCanvas submitButton
-				callback: [ self login: logueo ];
-				with: 'Ingresar' ]
+	aCanvas div
+		id: 'body';
+		with: [ aCanvas
+				form: [ aCanvas text: 'Nombre de usuario'.
+					aCanvas break.
+					aCanvas textInput
+															
+						callback: [ :value | logueo nombreUsuario: value ].
+					aCanvas break.
+					aCanvas break.
+					aCanvas text: 'Contraseña: '.
+					aCanvas break.
+					aCanvas textInput
+					type: 'password';	
+						callback: [ :value | logueo contrasenia: value ].
+					aCanvas break.
+					aCanvas break.
+					aCanvas submitButton
+						callback: [ self login: logueo ];
+						with: 'Ingresar' ] ]
 ]
 
-{ #category : #accessing }
-AccessGrantingComponent >> usuario [
-	^ usuario
+{ #category : #rendering }
+AccessGrantingComponent >> renderContentOn: aCanvas [	
+	self renderHeader: aCanvas.
+	self renderBody: aCanvas.
+	
 ]
 
-{ #category : #accessing }
-AccessGrantingComponent >> usuario: anObject [
-	usuario := anObject
+{ #category : #rendering }
+AccessGrantingComponent >> renderErrorPage:aCanvas [
+]
+
+{ #category : #rendering }
+AccessGrantingComponent >> renderHeader: aCanvas [	
+	aCanvas div id:'titulo'; with: [ 		aCanvas heading with: 'CuOOra'.
+	].
+	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+AccessGrantingComponent >> style [
+	^ '
+	#titulo{
+				font-size: 21;						
+		 		text-align: center;
+			}
+			
+	#body{
+				font-size: 21;						
+		 		text-align: center;
+				margin-top: 100px;
+
+			}		
+					
+	#error{ color: red;}
+		'
 ]
