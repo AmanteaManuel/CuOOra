@@ -1,6 +1,6 @@
 Class {
 	#name : #PreguntaComponent,
-	#superclass : #WAComponent,
+	#superclass : #MasterComponent,
 	#instVars : [
 		'pregunta'
 	],
@@ -36,7 +36,8 @@ PreguntaComponent >> pregunta: unaPregunta [
 
 { #category : #rendering }
 PreguntaComponent >> renderContentOn: aCanvas [
-	"self renderHeading: aCanvas."
+	self renderHeader: aCanvas.
+
 	self renderPregunta: aCanvas
 ]
 
@@ -47,8 +48,8 @@ PreguntaComponent >> renderPregunta: aCanvas [
 	aCanvas div
 		with: [ aCanvas paragraph with: 'Topicos: ' , pregunta topicosComoString ].
 	aCanvas
-		paragraph: [ aCanvas text: 'Realizada por: '.
-			aCanvas anchor callback: [ pregunta usuario ] ].	"consultar como resolver obtener el usuario"
+		paragraph: [ aCanvas text: 'Realizada por: ', pregunta usuario nombreUsuario. 
+			aCanvas anchor callback: [ pregunta usuario ] ].	
 	aCanvas
 		paragraph: [ aCanvas
 				render:

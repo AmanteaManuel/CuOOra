@@ -16,6 +16,11 @@ Respuesta class >> newRespuesta:descripcionStr [
 		descripcion: descripcionStr.
 ]
 
+{ #category : #'instance creation' }
+Respuesta class >> newRespuesta: descripcionStr usuario:anUser [
+	^ self new descripcion: descripcionStr; usuario:anUser.
+]
+
 { #category : #initialization }
 Respuesta >> initialize [
 	self
@@ -26,14 +31,4 @@ Respuesta >> initialize [
 { #category : #methods }
 Respuesta >> soyPregunta [
 	^false.
-]
-
-{ #category : #accesing }
-Respuesta >> usuario [
-	^usuario
-]
-
-{ #category : #accesing }
-Respuesta >> usuario: user [
-	usuario:= user.
 ]

@@ -2,10 +2,21 @@ Class {
 	#name : #SessionWithUser,
 	#superclass : #WASession,
 	#instVars : [
-		'usuario'
+		'usuario',
+		'model'
 	],
 	#category : #'CuOOra-ui'
 }
+
+{ #category : #accessing }
+SessionWithUser >> model [
+	^ model
+]
+
+{ #category : #accessing }
+SessionWithUser >> model: anObject [
+	model := anObject
+]
 
 { #category : #accessing }
 SessionWithUser >> usuario [

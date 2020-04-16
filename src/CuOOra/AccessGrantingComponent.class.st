@@ -60,12 +60,8 @@ AccessGrantingComponent >> nombreUsuario: anObject [
 { #category : #rendering }
 AccessGrantingComponent >> proceedWith: unUsuario [
 	self session usuario: unUsuario.
+	self session model: self model.
 	self call: HomeComponent new
-]
-
-{ #category : #rendering }
-AccessGrantingComponent >> registrarUsuario [
-	self call: RegisterComponent new.
 ]
 
 { #category : #rendering }

@@ -54,6 +54,19 @@ CuOOra >> altaPregunta:tituloStr descripcion:descripcionStr topicos:topicosList 
 ]
 
 { #category : #methods }
+CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosList usuario:anUser [
+	| p |
+	p := Pregunta
+		newPregunta: tituloStr
+		descripcion: descripcionStr
+		topicos: topicosList
+		usuario:anUser.
+	usuarioLogueado agregarPregunta: p.
+	preguntas add: p.
+	^ p
+]
+
+{ #category : #methods }
 CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj [
 	| r |
 	r := Respuesta newRespuesta: descripcionStr.
@@ -147,13 +160,46 @@ CuOOra >> preguntas: anObject [
 
 { #category : #'as yet unclassified' }
 CuOOra >> setearVariables [
-	| u1 u2 |
-	u1 := self
-		altaUsuario: 'manu'
-		contrasenia: '123'.
-	u2 := self
-		altaUsuario: 'user'
-		contrasenia: '123'
+	"| u1 u2 |
+	u1 := self altaUsuario: 'manu' contrasenia: '123'.
+	u2 := self altaUsuario: 'user' contrasenia: '123'"
+
+	| usuario pregunta t1 t2 t3 respuesta |
+	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
+	self usuarios add: usuario.
+	self usuarioLogueado: usuario.
+	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
+	self usuarios add: usuario.
+	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
+	self usuarios add: usuario.
+	"-----------------------------------------------------------"
+	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
+	self topicos add: t1.
+	t2 := Topico newTopico: 'Smalltalk' descripcion: 'prueba'.
+	self topicos add: t2.
+	t3 := Topico newTopico: 'POO' descripcion: 'prueba'.
+	self topicos add: t3.
+	"-----------------------------------------------------------"
+	pregunta := Pregunta
+		newPregunta: 'select?'
+		descripcion: 'como se hace un select'
+		topicos: self topicos.
+	self preguntas add: pregunta.
+	self usuarioLogueado posts add: pregunta.
+	pregunta := Pregunta
+		newPregunta: 'OrederedCollection?'
+		descripcion: 'como screo una instacia?'
+		topicos: self topicos.
+	self preguntas add: pregunta.
+	pregunta := Pregunta
+		newPregunta: 'polimorfismo'
+		descripcion: 'alguien me puede explicar esto?'
+		topicos: self topicos.
+	self preguntas add: pregunta.
+	"-----------------------------------------------------------"
+	respuesta := Respuesta newRespuesta: 'La respuesta es...'.
+	pregunta respuestas add: respuesta.
+	self usuarioLogueado posts add: respuesta
 ]
 
 { #category : #accessing }
@@ -167,13 +213,12 @@ CuOOra >> topicos: anObject [
 ]
 
 { #category : #methods }
-CuOOra >> ultimasCincoRelevantes [
-	|p|
-	p:= usuarioLogueado obtenerPreguntasRelevantes.	
-	(p size > 5)
-	ifTrue: [ ^p last: 5 ]
-	ifFalse: [^p ]
-	
+CuOOra >> ultimasCincoRelevantes:usuario [
+	| p |
+	p := usuario obtenerPreguntasRelevantes.
+	p size > 5
+		ifTrue: [ ^ p last: 5 ]
+		ifFalse: [ ^ p ]
 ]
 
 { #category : #accessing }

@@ -9,7 +9,8 @@ Class {
 		'fecha',
 		'hora',
 		'activo',
-		'reacciones'
+		'reacciones',
+		'usuario'
 	],
 	#category : #'CuOOra-Model'
 }
@@ -128,4 +129,14 @@ Post >> tieneLikeDe: usuarioObj [
 	| likes |
 	likes := reacciones select: [ :r | r soyLike ].
 	^ likes anySatisfy: [ :l | l tieneReaccionDe: usuarioObj ]
+]
+
+{ #category : #accessing }
+Post >> usuario [
+	^ usuario
+]
+
+{ #category : #accessing }
+Post >> usuario: anObject [
+	usuario := anObject
 ]

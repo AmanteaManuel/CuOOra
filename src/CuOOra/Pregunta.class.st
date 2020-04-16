@@ -18,6 +18,15 @@ Pregunta class >> newPregunta:tituloStr descripcion:descripcionStr topicos:topic
 		titulo: tituloStr; descripcion: descripcionStr; topicos: topicosList.
 ]
 
+{ #category : #'instance creation' }
+Pregunta class >> newPregunta: tituloStr descripcion: descripcionStr topicos: topicosList usuario:anUser [
+	^ self new
+		titulo: tituloStr;
+		descripcion: descripcionStr;
+		topicos: topicosList;
+		usuario:anUser.
+]
+
 { #category : #methods }
 Pregunta >> agregarRespuesta:respuestaObj [
 	respuestas add: respuestaObj.

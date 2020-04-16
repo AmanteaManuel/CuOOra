@@ -1,6 +1,6 @@
 Class {
 	#name : #HomeComponent,
-	#superclass : #WAComponent,
+	#superclass : #MasterComponent,
 	#instVars : [
 		'preguntas',
 		'usuario'
@@ -44,47 +44,38 @@ HomeComponent >> preguntas: anObject [
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: aCanvas [
-"header"
-	aCanvas heading	 with: 'CuOOra'.
-	aCanvas div id:'usuarioencabezado'; with: [ 
-		aCanvas render: 'Usuario: ', usuario nombreUsuario, ' '. 
-		aCanvas anchor
-			callback: [ ];
-			with: 'Log Out'.
-	].
-	aCanvas horizontalRule.	
-	aCanvas break.
-"body"
-aCanvas heading	 with: 'Ultimas preguntas'. 
-	aCanvas div id:'agregarPregunta';with:[ aCanvas button callback: [ ]; with: 'Hacer una nueva pregunta'].
+	"header"
 
-aCanvas horizontalRule.	
+	self renderHeader: aCanvas.
+	"body"
+	aCanvas heading with: 'Ultimas preguntas'.
+	aCanvas div
+		id: 'agregarPregunta';
+		with: [ aCanvas button
+				callback: [  ];
+				with: 'Hacer una nueva pregunta' ].
+	aCanvas horizontalRule.
 	aCanvas
 		unorderedList: [ preguntas
-				do: [ :pregunta | 						
-						aCanvas listItem: [ aCanvas anchor
-								callback: [ self renderPreguntaWith: pregunta ];
+				do: [ :pregunta | 
+					aCanvas
+						listItem: [ aCanvas anchor
+								callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
 								with: pregunta titulo ].
-						aCanvas paragraph: [
-						aCanvas render: 'Realizada por: '.
-						aCanvas anchor
-							callback: []; 
-							with: 'hacer '	].
-						aCanvas paragraph: [
-						aCanvas render: (pregunta cantidadRespuestas printString) , ' Respuestas'.
-						].
-						aCanvas paragraph: [
-						aCanvas render: 'Cantidad Likes ', (pregunta cantLikes printString) , ' | ',
-											 'Cantidad Dislikes ', (pregunta cantDislikes printString)
-											].
-						aCanvas horizontalRule.					
-					] ].
-			 
-]
-
-{ #category : #accessing }
-HomeComponent >> renderPreguntaWith: unaPregunta [
-
+					aCanvas
+						paragraph: [ aCanvas render: 'Realizada por: '.
+							aCanvas anchor
+								callback: [  ];
+								with: pregunta usuario nombreUsuario  ].
+					aCanvas
+						paragraph: [ aCanvas
+								render: pregunta cantidadRespuestas printString , ' Respuestas' ].
+					aCanvas
+						paragraph: [ aCanvas
+								render:
+									'Cantidad Likes ' , pregunta cantLikes printString , ' | '
+										, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
+					aCanvas horizontalRule ] ]
 ]
 
 { #category : #accessing }
