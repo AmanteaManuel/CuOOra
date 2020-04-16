@@ -11,6 +11,47 @@ Class {
 	#category : #'CuOOra-Tests'
 }
 
+{ #category : #running }
+CuOOraTest >> setUp [
+	| usuario pregunta t1 t2 t3 respuesta |
+	sistema := CuOOra new.
+	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
+	sistema usuarios add: usuario.
+	sistema usuarioLogueado: usuario.
+	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
+	sistema usuarios add: usuario.
+	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
+	sistema usuarios add: usuario.
+	"-----------------------------------------------------------"
+	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
+	sistema topicos add: t1.
+	t2 := Topico newTopico: 'Smalltalk' descripcion: 'prueba'.
+	sistema topicos add: t2.
+	t3 := Topico newTopico: 'POO' descripcion: 'prueba'.
+	sistema topicos add: t3.
+	"-----------------------------------------------------------"
+	pregunta := Pregunta
+		newPregunta: 'select?'
+		descripcion: 'como se hace un select'
+		topicos: sistema topicos.
+	sistema preguntas add: pregunta.
+	sistema usuarioLogueado posts add: pregunta.
+	pregunta := Pregunta
+		newPregunta: 'OrederedCollection?'
+		descripcion: 'como screo una instacia?'
+		topicos: sistema topicos.
+	sistema preguntas add: pregunta.
+	pregunta := Pregunta
+		newPregunta: 'polimorfismo'
+		descripcion: 'alguien me puede explicar esto?'
+		topicos: sistema topicos.
+	sistema preguntas add: pregunta.
+	"-----------------------------------------------------------"
+	respuesta := Respuesta newRespuesta: 'La respuesta es...'.
+	pregunta respuestas add: respuesta.
+	sistema usuarioLogueado posts add: respuesta
+]
+
 { #category : #test }
 CuOOraTest >> testAltaDislike [
 	| p dislike |

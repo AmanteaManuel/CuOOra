@@ -160,46 +160,50 @@ CuOOra >> preguntas: anObject [
 
 { #category : #'as yet unclassified' }
 CuOOra >> setearVariables [
-	"| u1 u2 |
-	u1 := self altaUsuario: 'manu' contrasenia: '123'.
-	u2 := self altaUsuario: 'user' contrasenia: '123'"
+	| u1 u2 u3 t1 t2 t3 p1 p2 r1 r2 tList |
+	"Agregar usuarios"
+	u1 := self
+		altaUsuario: 'pedro@cuoora.com'
+		contrasenia: 'pedro@cuoora.com'.
+	u2 := self
+		altaUsuario: 'diego@cuoora.com'
+		contrasenia: 'diego@cuoora.com'.
+	u3 := self
+		altaUsuario: 'juan@cuoora.com'
+		contrasenia: 'juan@cuoora.com'.
 
-	| usuario pregunta t1 t2 t3 respuesta |
-	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
-	self usuarios add: usuario.
-	self usuarioLogueado: usuario.
-	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
-	self usuarios add: usuario.
-	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
-	self usuarios add: usuario.
-	"-----------------------------------------------------------"
-	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
-	self topicos add: t1.
-	t2 := Topico newTopico: 'Smalltalk' descripcion: 'prueba'.
-	self topicos add: t2.
-	t3 := Topico newTopico: 'POO' descripcion: 'prueba'.
-	self topicos add: t3.
-	"-----------------------------------------------------------"
-	pregunta := Pregunta
-		newPregunta: 'select?'
-		descripcion: 'como se hace un select'
-		topicos: self topicos.
-	self preguntas add: pregunta.
-	self usuarioLogueado posts add: pregunta.
-	pregunta := Pregunta
-		newPregunta: 'OrederedCollection?'
-		descripcion: 'como screo una instacia?'
-		topicos: self topicos.
-	self preguntas add: pregunta.
-	pregunta := Pregunta
-		newPregunta: 'polimorfismo'
-		descripcion: 'alguien me puede explicar esto?'
-		topicos: self topicos.
-	self preguntas add: pregunta.
-	"-----------------------------------------------------------"
-	respuesta := Respuesta newRespuesta: 'La respuesta es...'.
-	pregunta respuestas add: respuesta.
-	self usuarioLogueado posts add: respuesta
+	"Relaciones entre usuarios"
+	self usuario: u3 seguirA: u2.
+	self usuario: u1 seguirA: u3.
+
+	"Topicos"
+	t1 := self altaTopico: 'OO1' descripcion: 'Orientacion a objetos 1'.
+	t2 := self altaTopico: 'Test de unidad' descripcion: 'tests'.
+	t3 := self
+		altaTopico: 'Smalltalk'
+		descripcion: 'Lenguaje de programacion'.
+
+	"Preguntas"
+	tList := OrderedCollection new.
+	tList add: t1.
+	tList add: t2.
+	p1 := self
+		altaPregunta: '¿Para qué sirve el metodo setUp?'
+		descripcion: ''
+		topicos: tList
+		usuario: u1.
+	tList := OrderedCollection new.
+	tList add: t1.
+	tList add: t3.
+	p2 := self
+		altaPregunta: '¿Qué significa #messageNotUnderstood'
+		descripcion: ''
+		topicos: tList
+		usuario: u2.
+		
+	"Respuesta"
+	r1 := self altaRespuesta: 'Sirve para instanciar los objetos que son evaluados por el test en un unico metodo y que se ejecute siempre antes de cada test.' pregunta: p1 .
+	r2 := self altaRespuesta: 'Significa que el objeto que recibio el mensaje no encontro ningun metodo para ejecutar en respuesta.' pregunta: p2.
 ]
 
 { #category : #accessing }
@@ -219,6 +223,11 @@ CuOOra >> ultimasCincoRelevantes:usuario [
 	p size > 5
 		ifTrue: [ ^ p last: 5 ]
 		ifFalse: [ ^ p ]
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> usuario: unUsuarioLogueado seguirA: otroUsuario [
+	^ (unUsuarioLogueado seguirUsuario: otroUsuario).
 ]
 
 { #category : #accessing }

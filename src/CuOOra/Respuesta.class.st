@@ -4,9 +4,6 @@ clase que modela una Pregunta en el sistema, la misma hereda del posteo.
 Class {
 	#name : #Respuesta,
 	#superclass : #Post,
-	#instVars : [
-		'usuario'
-	],
 	#category : #'CuOOra-Model'
 }
 
