@@ -45,7 +45,6 @@ HomeComponent >> preguntas: anObject [
 { #category : #rendering }
 HomeComponent >> renderContentOn: aCanvas [
 	"header"
-
 	self renderHeader: aCanvas.
 	"body"
 	aCanvas heading with: 'Ultimas preguntas'.
@@ -57,8 +56,13 @@ HomeComponent >> renderContentOn: aCanvas [
 	aCanvas horizontalRule.
 	aCanvas
 		unorderedList: [ preguntas
-				do: [ :pregunta | 
-					aCanvas
+				do: [ :pregunta | self renderPregunta: pregunta canvas: aCanvas. 
+					aCanvas horizontalRule ] ]
+]
+
+{ #category : #rendering }
+HomeComponent >> renderPregunta: pregunta canvas: aCanvas [
+						aCanvas
 						listItem: [ aCanvas anchor
 								callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
 								with: pregunta titulo ].
@@ -66,7 +70,7 @@ HomeComponent >> renderContentOn: aCanvas [
 						paragraph: [ aCanvas render: 'Realizada por: '.
 							aCanvas anchor
 								callback: [  ];
-								with: pregunta usuario nombreUsuario  ].
+								with: pregunta usuario nombreUsuario ].
 					aCanvas
 						paragraph: [ aCanvas
 								render: pregunta cantidadRespuestas printString , ' Respuestas' ].
@@ -75,7 +79,6 @@ HomeComponent >> renderContentOn: aCanvas [
 								render:
 									'Cantidad Likes ' , pregunta cantLikes printString , ' | '
 										, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
-					aCanvas horizontalRule ] ]
 ]
 
 { #category : #accessing }

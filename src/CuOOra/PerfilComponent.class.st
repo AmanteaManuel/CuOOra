@@ -13,8 +13,12 @@ usuario:= Usuario newNombreUsuario: 'Manuel' contrasenia:'123'
 ]
 
 { #category : #rendering }
-PerfilComponent >> renderBody:aCanvas [
-
+PerfilComponent >> renderBody: aCanvas [
+	aCanvas heading with: 'Preguntas de ' , usuario nombreUsuario.
+	aCanvas anchor
+		callback: [  ];
+		with: 'fallow'.
+	self renderPreguntas:aCanvas . 
 ]
 
 { #category : #rendering }
@@ -35,6 +39,11 @@ PerfilComponent >> renderHeader: aCanvas [
 				with: 'Log Out' ].
 	aCanvas horizontalRule.
 	aCanvas break
+]
+
+{ #category : #rendering }
+PerfilComponent >> renderPreguntas:aCanvas [
+	
 ]
 
 { #category : #rendering }
