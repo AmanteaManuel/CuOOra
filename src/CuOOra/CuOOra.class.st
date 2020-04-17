@@ -61,7 +61,7 @@ CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosLi
 		descripcion: descripcionStr
 		topicos: topicosList
 		usuario:anUser.
-	usuarioLogueado agregarPregunta: p.
+	anUser agregarPregunta: p.
 	preguntas add: p.
 	^ p
 ]

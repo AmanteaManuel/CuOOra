@@ -10,7 +10,8 @@ Class {
 
 { #category : #accessing }
 HomeComponent >> initialize [ 
-	|p t tList rList u1 u2|
+	preguntas :=  self session model obtenerPreguntasUsuario: (self session usuario)
+"	|p t tList rList u1 u2|
 	rList:= OrderedCollection new.	
 	tList:= OrderedCollection new.
 	preguntas:= OrderedCollection new.
@@ -29,7 +30,7 @@ HomeComponent >> initialize [
 	preguntas add: p.
 	
 	p:= Pregunta newPregunta: 'Orientacion a Objetos 2' descripcion:'ble ble ble'  topicos: tList.
-	preguntas add: p.
+	preguntas add: p."
 ]
 
 { #category : #accessing }
@@ -45,6 +46,7 @@ HomeComponent >> preguntas: anObject [
 { #category : #rendering }
 HomeComponent >> renderContentOn: aCanvas [
 	"header"
+
 	self renderHeader: aCanvas.
 	"body"
 	aCanvas heading with: 'Ultimas preguntas'.
@@ -56,7 +58,26 @@ HomeComponent >> renderContentOn: aCanvas [
 	aCanvas horizontalRule.
 	aCanvas
 		unorderedList: [ preguntas
-				do: [ :pregunta | self renderPregunta: pregunta canvas: aCanvas. 
+			
+				do: [ :pregunta |
+					aCanvas
+						listItem: [ aCanvas anchor
+								callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
+								with: pregunta titulo ].
+					
+					aCanvas
+						paragraph: [ aCanvas render: 'Realizada por: '.
+							aCanvas anchor
+								callback: [  ];
+								with: pregunta usuario nombreUsuario  ].
+					aCanvas
+						paragraph: [ aCanvas
+								render: pregunta cantidadRespuestas printString , ' Respuestas' ].
+					aCanvas
+						paragraph: [ aCanvas
+								render:
+									'Cantidad Likes ' , pregunta cantLikes printString , ' | '
+										, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
 					aCanvas horizontalRule ] ]
 ]
 
