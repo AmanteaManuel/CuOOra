@@ -1,6 +1,6 @@
 Class {
 	#name : #PerfilComponent,
-	#superclass : #WAComponent,
+	#superclass : #MasterComponent,
 	#instVars : [
 		'usuario'
 	],
