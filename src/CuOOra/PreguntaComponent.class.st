@@ -37,19 +37,24 @@ PreguntaComponent >> pregunta: unaPregunta [
 { #category : #rendering }
 PreguntaComponent >> renderContentOn: aCanvas [
 	self renderHeader: aCanvas.
-
-	self renderPregunta: aCanvas
+	aCanvas div
+		id: 'italicFont';
+		with: [ aCanvas heading with: pregunta titulo ].
+	self renderPregunta: pregunta canvas: aCanvas.
+	self renderTextareaRespuesta: aCanvas
 ]
 
 { #category : #rendering }
 PreguntaComponent >> renderPregunta: aCanvas [
+	"Este metodo no se usa mas ahora usa el metodo de la master que renderiza la pregunta"
+
 	aCanvas heading with: pregunta titulo.
 	aCanvas paragraph with: pregunta descripcion.
 	aCanvas div
 		with: [ aCanvas paragraph with: 'Topicos: ' , pregunta topicosComoString ].
 	aCanvas
-		paragraph: [ aCanvas text: 'Realizada por: ', pregunta usuario nombreUsuario. 
-			aCanvas anchor callback: [ pregunta usuario ] ].	
+		paragraph: [ aCanvas text: 'Realizada por: ' , pregunta usuario nombreUsuario.
+			aCanvas anchor callback: [ pregunta usuario ] ].
 	aCanvas
 		paragraph: [ aCanvas
 				render:
@@ -63,8 +68,6 @@ PreguntaComponent >> renderPregunta: aCanvas [
 			aCanvas anchor
 				callback: [ "llamar darDislike" ];
 				with: 'Dislike' ].
-	aCanvas horizontalRule.
-	self renderTextareaRespuesta: aCanvas.
 	aCanvas horizontalRule
 ]
 
@@ -84,4 +87,20 @@ PreguntaComponent >> renderTextareaRespuesta: aCanvas [
 				callback: [ "BotonCancelar" ];
 				value: 'Cancelar' ].
 			aCanvas horizontalRule.
+]
+
+{ #category : #rendering }
+PreguntaComponent >> style [
+	^ '
+#tituloPregunta{
+ display: block;
+ visibility:hidden;
+}
+#body{
+ font-size: 21;						
+ text-align: center;			
+}		
+#italicFont{ font-style: oblique;
+}
+' , super style
 ]

@@ -1,5 +1,6 @@
 "
-""|app|
+""
+|app|
 app := WAAdmin register: AccessGrantingComponent asApplicationAt: 'sistema'.
 app sessionClass: SessionWithUser. 
 

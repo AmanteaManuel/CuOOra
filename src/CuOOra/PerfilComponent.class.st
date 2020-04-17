@@ -7,52 +7,45 @@ Class {
 	#category : #'CuOOra-ui'
 }
 
+{ #category : #'instance creation' }
+PerfilComponent class >> newPerfil: anUser [
+	^ self new usuario:anUser.
+]
+
 { #category : #rendering }
 PerfilComponent >> initialize [
-usuario:= Usuario newNombreUsuario: 'Manuel' contrasenia:'123' 
+	super initialize.
 ]
 
 { #category : #rendering }
 PerfilComponent >> renderBody: aCanvas [
+	| preguntas |
+	aCanvas div
+		id: 'btnFallow';
+		with: [ aCanvas button
+				callback: [ self session model usuario: (self session usuario) seguirA:  usuario];
+				with: 'Fallow' ].
 	aCanvas heading with: 'Preguntas de ' , usuario nombreUsuario.
-	aCanvas anchor
-		callback: [  ];
-		with: 'fallow'.
-	self renderPreguntas:aCanvas . 
+	preguntas := self session model obtenerPreguntasUsuario: usuario.
+	aCanvas horizontalRule.
+	preguntas
+		do: [ :pregunta | 
+			self renderPregunta: pregunta canvas: aCanvas.
+			aCanvas horizontalRule ]
 ]
 
 { #category : #rendering }
 PerfilComponent >> renderContentOn: aCanvas [
 	self renderHeader: aCanvas.
-	self renderBody: aCanvas
+	self renderBody: aCanvas 
 ]
 
-{ #category : #rendering }
-PerfilComponent >> renderHeader: aCanvas [
-	aCanvas heading with: 'CuOOra'.
-	aCanvas div
-		id: 'usuarioencabezado';
-		with: [ aCanvas
-				render: 'Usuario: ' , 'Manuel' , ' '.
-			aCanvas anchor
-				callback: [  ];
-				with: 'Log Out' ].
-	aCanvas horizontalRule.
-	aCanvas break
+{ #category : #accessing }
+PerfilComponent >> usuario [
+	^ usuario
 ]
 
-{ #category : #rendering }
-PerfilComponent >> renderPreguntas:aCanvas [
-	
-]
-
-{ #category : #rendering }
-PerfilComponent >> style [
-	^ '
-	#body{
-				font-size: 21;						
-		 		text-align: center;
-				margin-top: 100px;
-			}		
-		'
+{ #category : #accessing }
+PerfilComponent >> usuario: anObject [
+	usuario := anObject
 ]

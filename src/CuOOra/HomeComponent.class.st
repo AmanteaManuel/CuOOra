@@ -45,61 +45,19 @@ HomeComponent >> preguntas: anObject [
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: aCanvas [
-	"header"
-
 	self renderHeader: aCanvas.
-	"body"
 	aCanvas heading with: 'Ultimas preguntas'.
-	aCanvas div
-		id: 'agregarPregunta';
-		with: [ aCanvas button
-				callback: [  ];
-				with: 'Hacer una nueva pregunta' ].
-	aCanvas horizontalRule.
-	aCanvas
-		unorderedList: [ preguntas
-			
-				do: [ :pregunta |
-					aCanvas
-						listItem: [ aCanvas anchor
-								callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
-								with: pregunta titulo ].
-					
-					aCanvas
-						paragraph: [ aCanvas render: 'Realizada por: '.
-							aCanvas anchor
-								callback: [  ];
-								with: pregunta usuario nombreUsuario  ].
-					aCanvas
-						paragraph: [ aCanvas
-								render: pregunta cantidadRespuestas printString , ' Respuestas' ].
-					aCanvas
-						paragraph: [ aCanvas
-								render:
-									'Cantidad Likes ' , pregunta cantLikes printString , ' | '
-										, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
-					aCanvas horizontalRule ] ]
-]
-
-{ #category : #rendering }
-HomeComponent >> renderPregunta: pregunta canvas: aCanvas [
-						aCanvas
-						listItem: [ aCanvas anchor
-								callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
-								with: pregunta titulo ].
-					aCanvas
-						paragraph: [ aCanvas render: 'Realizada por: '.
-							aCanvas anchor
-								callback: [  ];
-								with: pregunta usuario nombreUsuario ].
-					aCanvas
-						paragraph: [ aCanvas
-								render: pregunta cantidadRespuestas printString , ' Respuestas' ].
-					aCanvas
-						paragraph: [ aCanvas
-								render:
-									'Cantidad Likes ' , pregunta cantLikes printString , ' | '
-										, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
+			aCanvas div
+				id: 'agregarPregunta';
+				with: [ aCanvas button
+						callback: [  ];
+						with: 'Hacer una nueva pregunta' ].
+			aCanvas horizontalRule.
+			aCanvas
+				unorderedList: [ preguntas
+						do: [ :pregunta | 
+							self renderPregunta: pregunta canvas: aCanvas.
+							aCanvas horizontalRule ] ] 
 ]
 
 { #category : #accessing }
@@ -110,5 +68,5 @@ HomeComponent >> style [
 	
 	#agregarPregunta{text-align:right;
 	}
-	'
+	' 
 ]
