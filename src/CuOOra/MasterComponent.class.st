@@ -14,8 +14,11 @@ MasterComponent >> renderHeader: aCanvas [
 				with: [ aCanvas
 						render: 'Usuario: ' , self session usuario nombreUsuario , ' '.
 					aCanvas anchor
-						callback: [ self call: NuevaPreguntaComponent newNuevaPreguntaComponent ];
-						with: 'Log Out' ] ].
+						callback: [ self call: HomeComponent new ];
+						with: 'Home |'.
+					aCanvas anchor
+						callback: [ self call: NuevaPreguntaComponent nuevaPreguntaComponent ];
+						with: ' Log Out' ] ].
 	aCanvas horizontalRule.
 	aCanvas break
 ]

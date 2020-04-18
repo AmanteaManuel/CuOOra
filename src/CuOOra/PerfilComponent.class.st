@@ -23,8 +23,9 @@ PerfilComponent >> renderBody: aCanvas [
 	aCanvas div
 		id: 'btnFallow';
 		with: [ aCanvas button
-				callback: [ self session model usuario: (self session usuario) seguirA:  usuario];
-				with: 'Fallow' ].
+				callback:
+						[ self session model usuario: self session usuario seguirA: usuario ];
+				with: 'Follow' ].
 	aCanvas heading with: 'Preguntas de ' , usuario nombreUsuario.
 	preguntas := self session model obtenerPreguntasUsuario: usuario.
 	aCanvas horizontalRule.

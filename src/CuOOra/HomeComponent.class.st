@@ -69,5 +69,9 @@ HomeComponent >> style [
 	
 	#agregarPregunta{text-align:right;
 	}
-	' 
+	#titulo{
+				font-size: 21;						
+		 		text-align: center;
+			}
+	'
 ]
