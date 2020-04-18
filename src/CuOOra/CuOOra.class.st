@@ -246,7 +246,7 @@ CuOOra >> ultimasCincoRelevantes:usuario [
 		ifFalse: [ ^ p ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 CuOOra >> usuario: unUsuarioLogueado seguirA: otroUsuario [
 	^ (unUsuarioLogueado seguirUsuario: otroUsuario).
 ]
@@ -273,7 +273,6 @@ CuOOra >> usuarios: anObject [
 
 { #category : #methods }
 CuOOra >> validarTopico: nombreStr [
-self halt.
 	^ topicos
 		detect: [ :topico | topico existeNombre: nombreStr ]
 		ifNone: [ nil ]
