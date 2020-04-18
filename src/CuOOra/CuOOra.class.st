@@ -142,20 +142,14 @@ CuOOra >> nombreUsuario: unNombre contrasenia: contrasenia [
 ]
 
 { #category : #methods }
-CuOOra >> obtenerPreguntasRelevantesUsuario [
-	^ usuarioLogueado obtenerPreguntasRelevantes
-]
-
-{ #category : #methods }
 CuOOra >> obtenerPreguntasRelevantesUsuario: anUser [
 	| list |
-	list := OrderedCollection new.
-	list
+	list := Set new.
+	"	list
 		addAll:
 			(preguntas
-				do: [ :pregunta | pregunta coincidenTopicos: anUser topicosDeInteres ]).
-	list
-		addAll: (anUser follows do: [ :follow | follow obtenerPreguntas ]).
+				select: [ :pregunta | pregunta coincidenTopicos: anUser topicosDeInteres ])."
+	anUser preguntasSeguidos do: [ :pregunta | list add: pregunta ].
 	^ list
 ]
 

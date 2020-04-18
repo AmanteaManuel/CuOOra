@@ -2,16 +2,16 @@ Class {
 	#name : #HomeComponent,
 	#superclass : #MasterComponent,
 	#instVars : [
-		'preguntas',
-		'usuario'
+		'preguntas'
 	],
 	#category : #'CuOOra-ui'
 }
 
 { #category : #accessing }
-HomeComponent >> initialize [ 
-	preguntas :=  self session model obtenerPreguntasUsuario: (self session usuario)
-"	|p t tList rList u1 u2|
+HomeComponent >> initialize [
+	preguntas := self session model
+		obtenerPreguntasRelevantesUsuario: self session usuario
+	"	|p t tList rList u1 u2|
 	rList:= OrderedCollection new.	
 	tList:= OrderedCollection new.
 	preguntas:= OrderedCollection new.
@@ -51,8 +51,7 @@ HomeComponent >> renderContentOn: aCanvas [
 		id: 'agregarPregunta';
 		with: [ aCanvas anchor
 				callback: [ self call: NuevaPreguntaComponent new ];
-				with: [ aCanvas button with: 'Hacer una nueva pregunta' ]
-			].
+				with: [ aCanvas button with: 'Hacer una nueva pregunta' ] ].
 	aCanvas horizontalRule.
 	aCanvas
 		unorderedList: [ preguntas
