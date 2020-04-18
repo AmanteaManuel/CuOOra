@@ -149,13 +149,6 @@ Usuario >> obtenerPreguntas [
 ]
 
 { #category : #methods }
-Usuario >> obtenerPreguntasRelevantes [
-	| porTopico porFollow |
-	porTopico:= self obtenerPreguntas select: [ :preg | (self incluyeTopicos: preg) ].
-	porFollow := follows select: [ :f | f obtenerPreguntas  ]
-]
-
-{ #category : #methods }
 Usuario >> obtenerRespuestas [
 	^ posts select: [ :pregunta | pregunta soyPregunta not ]
 ]
@@ -168,6 +161,11 @@ Usuario >> posts [
 { #category : #accessing }
 Usuario >> posts: anObject [
 	posts := anObject
+]
+
+{ #category : #methods }
+Usuario >> preguntasSeguidos [
+	^ follows do: [ :follow | follow obtenerPreguntas ]
 ]
 
 { #category : #methods }
