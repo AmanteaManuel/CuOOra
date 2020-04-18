@@ -44,23 +44,14 @@ CuOOra >> altaLike: post [
 ]
 
 { #category : #methods }
-CuOOra >> altaPregunta:tituloStr descripcion:descripcionStr topicos:topicosList [
-	|p|
-	p := Pregunta newPregunta: tituloStr descripcion:descripcionStr topicos:topicosList.
-	usuarioLogueado agregarPregunta:p.
-	preguntas add: p.
-	^p.
-	
-]
-
-{ #category : #methods }
-CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosList usuario:anUser [
-	| p |
+CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosStr usuario: anUser [
+	| p topicosList |
+	topicosList := self generarListaTopicos: topicosStr.
 	p := Pregunta
 		newPregunta: tituloStr
 		descripcion: descripcionStr
 		topicos: topicosList
-		usuario:anUser.
+		usuario: anUser.
 	anUser agregarPregunta: p.
 	preguntas add: p.
 	^ p
@@ -77,10 +68,13 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj [
 
 { #category : #methods }
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
-	(self validarTopico: nombreStr)
-		ifNotNil: [ ^ self ].
-	^ topicos
-		add: (Topico newTopico: nombreStr descripcion: descripcionStr)
+	| topico |	
+	topico := self validarTopico: nombreStr.
+	topico
+		isNil;
+		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
+			topicos add: topico ].
+	^ topico
 ]
 
 { #category : #methods }
@@ -112,6 +106,16 @@ CuOOra >> calcularPuntajeUsuario:unUsuario [
 { #category : #methods }
 CuOOra >> existeNombreUsuario: nombreStr [
 	^ usuarios anySatisfy: [ :user | user nombreUsuario = nombreStr ]
+]
+
+{ #category : #methods }
+CuOOra >> generarListaTopicos: topicoslist [
+	| list topicosStrList |
+	list := OrderedCollection new.
+	topicosStrList := topicoslist splitOn: ','.
+	topicosStrList
+		do: [ :t | list add: (self altaTopico: t descripcion: t) ].
+		^list.
 ]
 
 { #category : #methods }
@@ -252,6 +256,8 @@ CuOOra >> usuarios: anObject [
 
 { #category : #methods }
 CuOOra >> validarTopico: nombreStr [
-	^ topicos detect: [ :topico | topico existeNombre: nombreStr ]
-	ifNone: [ ^nil ]
+self halt.
+	^ topicos
+		detect: [ :topico | topico existeNombre: nombreStr ]
+		ifNone: [ nil ]
 ]

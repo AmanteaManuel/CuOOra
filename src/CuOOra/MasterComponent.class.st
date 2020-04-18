@@ -8,15 +8,15 @@ Class {
 MasterComponent >> renderHeader: aCanvas [
 	aCanvas div
 		id: 'titulo';
-		with:
-			[ aCanvas heading with: 'CuOOra'.
+		with: [ aCanvas heading with: 'CuOOra'.
 			aCanvas div
 				id: 'usuarioencabezado';
 				with: [ aCanvas
 						render: 'Usuario: ' , self session usuario nombreUsuario , ' '.
 					aCanvas anchor
-						callback: [  ];
-						with: 'Log Out' ] ]. aCanvas horizontalRule.
+						callback: [ self call: NuevaPreguntaComponent newNuevaPreguntaComponent ];
+						with: 'Log Out' ] ].
+	aCanvas horizontalRule.
 	aCanvas break
 ]
 
@@ -71,5 +71,6 @@ MasterComponent >> style [
 			}
 	#tituloPregunta{}
 	#nombreOwnerPregunta{ text-decoration: overline;}
+	#formInput{ width: 100%;}
 	'
 ]

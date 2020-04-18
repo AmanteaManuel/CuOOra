@@ -47,17 +47,18 @@ HomeComponent >> preguntas: anObject [
 HomeComponent >> renderContentOn: aCanvas [
 	self renderHeader: aCanvas.
 	aCanvas heading with: 'Ultimas preguntas'.
-			aCanvas div
-				id: 'agregarPregunta';
-				with: [ aCanvas button
-						callback: [  ];
-						with: 'Hacer una nueva pregunta' ].
-			aCanvas horizontalRule.
-			aCanvas
-				unorderedList: [ preguntas
-						do: [ :pregunta | 
-							self renderPregunta: pregunta canvas: aCanvas.
-							aCanvas horizontalRule ] ] 
+	aCanvas div
+		id: 'agregarPregunta';
+		with: [ aCanvas anchor
+				callback: [ self call: NuevaPreguntaComponent new ];
+				with: [ aCanvas button with: 'Hacer una nueva pregunta' ]
+			].
+	aCanvas horizontalRule.
+	aCanvas
+		unorderedList: [ preguntas
+				do: [ :pregunta | 
+					self renderPregunta: pregunta canvas: aCanvas.
+					aCanvas horizontalRule ] ]
 ]
 
 { #category : #accessing }
