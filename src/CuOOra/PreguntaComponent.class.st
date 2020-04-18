@@ -12,10 +12,26 @@ PreguntaComponent class >> newPregunta: unaPregunta [
 	^ self new pregunta: unaPregunta.
 ]
 
+{ #category : #'as yet unclassified' }
+PreguntaComponent >> agregarRespuesta [
+	| unaRespuesta |
+	unaRespuesta := Respuesta new.
+	self
+		call:
+			(AgregarRespuestaComponent
+				newAgregarRespuesta: unaRespuesta
+				para: pregunta)
+"		onAnswer:
+			(self session model
+				altaRespuesta: unaRespuesta
+				pregunta: pregunta
+				usuario: self session usuario)"
+]
+
 { #category : #accessing }
 PreguntaComponent >> initialize [
 "setea una pregunta"
-	| tList t p u |
+"	| tList t p u |
 	u := Usuario new.
 	tList := OrderedCollection new.
 	t := Topico newTopico: 'Objetos' descripcion: 'prueba'.
@@ -26,7 +42,7 @@ PreguntaComponent >> initialize [
 		newPregunta: 'Problemas con pharo'
 		descripcion: 'No me anda el seaside'
 		topicos: tList.
-	pregunta := p
+	pregunta := p"
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,7 +57,14 @@ PreguntaComponent >> renderContentOn: aCanvas [
 		id: 'italicFont';
 		with: [ aCanvas heading with: pregunta titulo ].
 	self renderPregunta: pregunta canvas: aCanvas.
-	self renderTextareaRespuesta: aCanvas
+	aCanvas anchor
+		callback: [ self agregarRespuesta ];
+		with: [ aCanvas text: '+ Agregar respuesta' ].
+	"Mostrar las respuestas:"
+	aCanvas horizontalRule.
+	aCanvas
+		table: [ pregunta respuestas
+				do: [ :respuesta | self renderRespuesta: respuesta on: aCanvas ] ]
 ]
 
 { #category : #rendering }
@@ -72,21 +95,29 @@ PreguntaComponent >> renderPregunta: aCanvas [
 ]
 
 { #category : #rendering }
-PreguntaComponent >> renderTextareaRespuesta: aCanvas [
-	aCanvas
-		form: [ aCanvas textArea
-				rows: 10;
-				columns: 50;
-				callback: [ :value |  ];
-				with: 'Escriba aqui el texto de su respuesta'.
+PreguntaComponent >> renderRespuesta: unaRespuesta on: aCanvas [
+	aCanvas paragraph
+		with: [ aCanvas text: 'Respuesta de '.
+			aCanvas anchor
+				callback: [ "ver perfil" ];
+				with: [ unaRespuesta usuario
+						ifNotNil: [ aCanvas text: unaRespuesta usuario nombreUsuario ] ].
 			aCanvas break.
-			aCanvas submitButton
-				callback: [ "botonGuardar" ];
-				value: 'Responder'.
-			aCanvas submitButton
-				callback: [ "BotonCancelar" ];
-				value: 'Cancelar' ].
-			aCanvas horizontalRule.
+			aCanvas text: unaRespuesta descripcion.
+			aCanvas
+				paragraph: [ aCanvas
+						render:
+							'Cantidad Likes ' , unaRespuesta cantLikes printString , ' | '
+								, 'Cantidad Dislikes ' , unaRespuesta cantDislikes printString ].
+			aCanvas
+				paragraph: [ aCanvas anchor
+						callback: [ self session model altaLike: unaRespuesta ];
+						with: 'Like'.
+					aCanvas text: '|'.
+					aCanvas anchor
+						callback: [ self session model altaDislike: unaRespuesta ];
+						with: 'Dislike' ].
+			aCanvas horizontalRule ]
 ]
 
 { #category : #rendering }

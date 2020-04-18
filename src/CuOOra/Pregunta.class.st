@@ -39,7 +39,8 @@ Pregunta >> cantidadRespuestas [
 ]
 
 { #category : #methods }
-Pregunta >> coincidenTopicos [
+Pregunta >> coincidenTopicos: topicosUsuario [
+	^ self topicos includesAny: topicosUsuario.
 ]
 
 { #category : #initialization }

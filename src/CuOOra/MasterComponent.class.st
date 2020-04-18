@@ -22,11 +22,11 @@ MasterComponent >> renderHeader: aCanvas [
 
 { #category : #rendering }
 MasterComponent >> renderPregunta: pregunta canvas: aCanvas [
-aCanvas div id:'tituloPregunta';
-with:[
-	aCanvas anchor
-		callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
-		with: pregunta titulo].
+	aCanvas div
+		id: 'tituloPregunta';
+		with: [ aCanvas anchor
+				callback: [ self call: (PreguntaComponent newPregunta: pregunta) ];
+				with: pregunta titulo ].
 	aCanvas div
 		with: [ aCanvas paragraph with: 'Topicos: ' , pregunta topicosComoString ].
 	aCanvas
@@ -44,11 +44,11 @@ with:[
 						, 'Cantidad Dislikes ' , pregunta cantDislikes printString ].
 	aCanvas
 		paragraph: [ aCanvas anchor
-				callback: [ "llamar a darLike" ];
+				callback: [ self session model altaLike: pregunta ];
 				with: 'Like'.
 			aCanvas text: '|'.
 			aCanvas anchor
-				callback: [ "llamar darDislike" ];
+				callback: [ self session model altaDislike: pregunta ];
 				with: 'Dislike' ]
 ]
 

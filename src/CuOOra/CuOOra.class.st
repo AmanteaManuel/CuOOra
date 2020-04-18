@@ -76,6 +76,15 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj [
 ]
 
 { #category : #methods }
+CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj usuario: anUser [
+	| r |
+	r := Respuesta newRespuesta: descripcionStr usuario: anUser.
+	preguntaObj agregarRespuesta: r.
+	^ r
+	"DEBERIAMOS DE AGREGARO LOS OBJETOS CAMBIADOS A LA LISTA OTRA VEZ????"
+]
+
+{ #category : #methods }
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	(self validarTopico: nombreStr)
 		ifNotNil: [ ^ self ].
@@ -134,8 +143,16 @@ CuOOra >> obtenerPreguntasRelevantesUsuario [
 ]
 
 { #category : #methods }
-CuOOra >> obtenerPreguntasRelevantesUsuario: unUsuario [
-	^ preguntas select: [ :p | p esDeInteresPara: unUsuario ].
+CuOOra >> obtenerPreguntasRelevantesUsuario: anUser [
+	| list |
+	list := OrderedCollection new.
+	list
+		addAll:
+			(preguntas
+				do: [ :pregunta | pregunta coincidenTopicos: anUser topicosDeInteres ]).
+	list
+		addAll: (anUser follows do: [ :follow | follow obtenerPreguntas ]).
+	^ list
 ]
 
 { #category : #methods }
@@ -196,7 +213,7 @@ CuOOra >> setearVariables [
 	tList add: t1.
 	tList add: t3.
 	p2 := self
-		altaPregunta: '¿Qué significa #messageNotUnderstood'
+		altaPregunta: '¿Qué significa #messageNotUnderstood?'
 		descripcion: ''
 		topicos: tList
 		usuario: u2.
