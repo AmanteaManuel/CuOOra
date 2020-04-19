@@ -82,7 +82,7 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj usuario: anUser [
 { #category : #methods }
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |	
-	topico := self validarTopico: nombreStr.
+	"topico := self validarTopico: nombreStr."
 	topico
 		isNil;
 		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
@@ -147,19 +147,18 @@ CuOOra >> nombreUsuario: unNombre contrasenia: contrasenia [
 
 { #category : #methods }
 CuOOra >> obtenerPreguntasRelevantesUsuario: anUser [
-	| list |
-	list := Set new.
-	"	list
-		addAll:
-			(preguntas
-				select: [ :pregunta | pregunta coincidenTopicos: anUser topicosDeInteres ])."
-	anUser preguntasSeguidos do: [ :pregunta | list add: pregunta ].
-	^ list
+	| preguntasFollow preguntasTopicos |
+	preguntasFollow := Set new.
+	preguntasTopicos := Set new.
+	preguntasFollow := anUser preguntasFollowers.
+	preguntasTopicos := anUser preguntasTopicos:preguntas.
+	preguntasFollow addAll: preguntasTopicos.
+	^ preguntasFollow
 ]
 
 { #category : #methods }
 CuOOra >> obtenerPreguntasUsuario: unUsuario [
-	^ (unUsuario obtenerPreguntas ).
+	^ (unUsuario obtenerPreguntas)
 ]
 
 { #category : #methods }
@@ -244,9 +243,9 @@ CuOOra >> ultimasCincoRelevantes:usuario [
 		ifFalse: [ ^ p ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 CuOOra >> usuario: unUsuarioLogueado seguirA: otroUsuario [
-	 unUsuarioLogueado seguirUsuario: otroUsuario
+	^ (unUsuarioLogueado seguirUsuario: otroUsuario).
 ]
 
 { #category : #accessing }
