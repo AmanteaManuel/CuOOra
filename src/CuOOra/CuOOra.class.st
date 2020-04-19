@@ -63,10 +63,9 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj usuario: anUser [
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |
 	topico := self validarTopico: nombreStr.
-	topico
-		isNil;
-		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-				topicos add: topico ].
+	topico ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
+						 topicos add: topico ]
+			ifNotNil: [ ^nil ].
 	^ topico
 ]
 

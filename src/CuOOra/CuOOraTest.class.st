@@ -20,10 +20,6 @@ CuOOraTest >> setUp [
 	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	usuarioLogueado := usuario.
-	usuario := Usuario newNombreUsuario: 'manu' contrasenia: '123'.
-	sistema usuarios add: usuario.
-	usuario := Usuario newNombreUsuario: 'cami' contrasenia: '123'.
-	sistema usuarios add: usuario.
 	"-----------------------------------------------------------"
 	"Agrego topicos"
 	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
@@ -42,17 +38,14 @@ CuOOraTest >> setUp [
 	sistema preguntas add: pregunta.
 	usuarioLogueado posts add: pregunta.
 	pregunta := Pregunta
-		newPregunta: 'OrederedCollection?'
-		descripcion: 'como screo una instacia?'
-		topicos: tList.
-	sistema preguntas add: pregunta.
-	pregunta := Pregunta
-		newPregunta: 'polimorfismo'
-		descripcion: 'alguien me puede explicar esto?'
+		newPregunta: 'OrderedCollection?'
+		descripcion: 'como creo una instancia?'
 		topicos: tList.
 	sistema preguntas add: pregunta.
 	"-----------------------------------------------------------"
-	respuesta := Respuesta newRespuesta: 'La respuesta es...'.
+	respuesta := Respuesta
+		newRespuesta: 'La respuesta es...'
+		usuario: usuarioLogueado.
 	pregunta respuestas add: respuesta.
 	usuarioLogueado posts add: respuesta
 ]
@@ -103,7 +96,7 @@ CuOOraTest >> testAltaTopicoDescripcion [
 	t := sistema altaTopico: 'Programacion' descripcion: 'prueba'.
 	self assert: (sistema topicos includes: t).
 	"Pruebo con un topico que ya exista."
-	t := sistema altaTopico: 'SQL' descripcion: 'prueba'.
+	t := sistema altaTopico: 'POO' descripcion: 'prueba'.
 	self deny: (sistema topicos includes: t)
 ]
 
