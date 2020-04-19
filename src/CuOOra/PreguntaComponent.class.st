@@ -12,7 +12,7 @@ PreguntaComponent class >> newPregunta: unaPregunta [
 	^ self new pregunta: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 PreguntaComponent >> agregarRespuesta [
 	| unaRespuesta |
 	unaRespuesta := Respuesta new.
@@ -45,7 +45,7 @@ PreguntaComponent >> initialize [
 	pregunta := p"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PreguntaComponent >> pregunta: unaPregunta [ 
 	pregunta := unaPregunta.
 ]

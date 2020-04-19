@@ -12,12 +12,12 @@ AgregarRespuestaComponent class >> newAgregarRespuesta: unaRespuesta para: unaPr
 	^ self new respuesta: unaRespuesta para: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 AgregarRespuestaComponent >> cancelar [
 	self respuesta: nil.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 AgregarRespuestaComponent >> guardar: unaRespuesta a: unaPregunta de: unUsuario [
 	""
 
@@ -61,7 +61,7 @@ AgregarRespuestaComponent >> respuesta: anObject [
 	respuesta := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 AgregarRespuestaComponent >> respuesta: unaRespuesta para: unaPregunta [
 	respuesta := unaRespuesta. pregunta:= unaPregunta
 ]
