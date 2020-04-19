@@ -53,7 +53,8 @@ Pregunta >> initialize [
 Pregunta >> obtenerRespuestasPorPuntaje [
 	| list |
 	list := SortedCollection new.
-	list := respuestas asSortedCollection: [ :r1 :r2 | r1 diferenciaLikesDislikes < r2 diferenciaLikesDislikes ].
+	list := respuestas
+		asSortedCollection: [ :r1 :r2 | r1 diferenciaLikesDislikes > r2 diferenciaLikesDislikes ].
 	^ list
 ]
 
