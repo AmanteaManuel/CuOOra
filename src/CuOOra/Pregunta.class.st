@@ -50,6 +50,14 @@ Pregunta >> initialize [
 ]
 
 { #category : #methods }
+Pregunta >> obtenerRespuestasPorPuntaje [
+	| list |
+	list := SortedCollection new.
+	list := respuestas asSortedCollection: [ :r1 :r2 | r1 diferenciaLikesDislikes < r2 diferenciaLikesDislikes ].
+	^ list
+]
+
+{ #category : #methods }
 Pregunta >> perteneceATopico:unTopico [
 	^ topicos includes:unTopico
 ]

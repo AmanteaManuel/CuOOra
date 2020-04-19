@@ -141,14 +141,6 @@ Usuario >> obtenerRespuestas [
 	^ posts select: [ :pregunta | pregunta soyPregunta not ]
 ]
 
-{ #category : #methods }
-Usuario >> obtenerRespuestasPorPuntaje [
-	| list |
-	list := SortedCollection new.
-	list asSortedCollection: [ :r1 :r2 | r1 diferenciaLikesDislikes < r2 diferenciaLikesDislikes ].
-	^ list
-]
-
 { #category : #accessing }
 Usuario >> posts [
 	^ posts

@@ -63,7 +63,7 @@ PreguntaComponent >> renderContentOn: aCanvas [
 	"Mostrar las respuestas:"
 	aCanvas horizontalRule.
 	aCanvas
-		table: [ pregunta respuestas
+		table: [ pregunta obtenerRespuestasPorPuntaje
 				do: [ :respuesta | self renderRespuesta: respuesta on: aCanvas ] ]
 ]
 
