@@ -38,11 +38,6 @@ Pregunta >> cantidadRespuestas [
 	^(self respuestas size).
 ]
 
-{ #category : #methods }
-Pregunta >> coincidenTopicos: topicosUsuario [
-	^ self topicos includesAny: topicosUsuario.
-]
-
 { #category : #initialization }
 Pregunta >> initialize [
 	self

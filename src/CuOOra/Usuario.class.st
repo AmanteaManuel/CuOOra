@@ -40,9 +40,8 @@ Usuario >> agregarRespuesta: unaRespuesta [
 
 { #category : #methods }
 Usuario >> agregarTopicoInteres: unTopico [
-	(self topicosInteres includes: unTopico)
-	ifFalse:[
-		topicosDeInteres add: unTopico].
+	(self topicosDeInteres includes: unTopico)
+		ifFalse: [ topicosDeInteres add: unTopico ]
 ]
 
 { #category : #methods }
@@ -118,13 +117,6 @@ Usuario >> follows: anObject [
 	follows := anObject
 ]
 
-{ #category : #methods }
-Usuario >> incluyeTopicos: unaPregunta [
-	"si los topicos del usuario estan incluidos en una pregunta"
-
-	^ topicosDeInteres detect: [ :t | unaPregunta topicos includes: t ]
-]
-
 { #category : #initialization }
 Usuario >> initialize [
 	fechaHora := DateAndTime now.
@@ -164,8 +156,27 @@ Usuario >> posts: anObject [
 ]
 
 { #category : #methods }
-Usuario >> preguntasSeguidos [
-	^ follows do: [ :follow | follow obtenerPreguntas ]
+Usuario >> preguntasFollowers [
+	| listReturn preguntasFollowers |
+	listReturn := Set new.
+	preguntasFollowers := self follows
+		collect: [ :f | f obtenerPreguntas ].
+	preguntasFollowers do: [ :each | listReturn addAll: each ].
+	^ listReturn
+]
+
+{ #category : #initialization }
+Usuario >> preguntasTopicos: preguntasSistema [
+	| returnList |
+	returnList:= Set new.
+	preguntasSistema
+		do: [ :p | 
+			self topicosDeInteres
+				do: [ :topico | 
+					p
+						perteneceATopico: topico;
+						ifTrue: [ returnList add: p ] ] ].
+	^ returnList
 ]
 
 { #category : #methods }
@@ -181,7 +192,7 @@ Usuario >> sacarLike: unPost [
 { #category : #methods }
 Usuario >> seguirUsuario: unUsuario [
 	(self sigueAUsuario: unUsuario)
-		ifFalse: [ ^ follows add: unUsuario ]
+		ifFalse: [ follows add: unUsuario ]
 ]
 
 { #category : #methods }
@@ -197,12 +208,4 @@ Usuario >> tienePregunta: unaPregunta [
 { #category : #accessing }
 Usuario >> topicosDeInteres [
 	^topicosDeInteres
-]
-
-{ #category : #methods }
-Usuario >> topicosInteres [
-	^ topicosDeInteres 
-	"getter coleccion"
-
-	
 ]

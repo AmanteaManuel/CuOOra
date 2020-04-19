@@ -20,7 +20,7 @@ UsuarioTest >> setUp [
 	u1 := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	u2 := Usuario newNombreUsuario: 'user2' contrasenia: '123'.
 	u3 := Usuario newNombreUsuario: 'user3' contrasenia: '123'.
-	u1 topicosInteres add: t.
+	u1 topicosDeInteres add: t.
 	top := t.
 	"---------------------------------------------------------"
 	p := Pregunta
@@ -70,7 +70,7 @@ UsuarioTest >> testAgregarTopicoInteres [
 	topicoFail := top.
 	usuario agregarTopicoInteres: topico.
 	self
-		assert: [ (usuario topicosInteres select: [ :t | t nombre = 'Base de datos' ])
+		assert: [ (usuario topicosDeInteres select: [ :t | t nombre = 'Base de datos' ])
 				size = 1 ].
 	usuario agregarTopicoInteres: topicoFail
 	"self
