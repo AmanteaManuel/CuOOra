@@ -27,19 +27,13 @@ CuOOra class >> soleInstance [
 ]
 
 { #category : #methods }
-CuOOra >> altaDislike: post [
-	^ post darDislike: usuarioLogueado
+CuOOra >> altaDislike: post de: anUser [
+	^ post darLike: anUser
 ]
 
 { #category : #methods }
-CuOOra >> altaFollow:user [
-
-	usuarioLogueado seguirUsuario: user.
-]
-
-{ #category : #methods }
-CuOOra >> altaLike: post [
-	^ post darLike: usuarioLogueado
+CuOOra >> altaFollow: anUser a: anotherUser [
+	self usuario: anUser seguirA: anotherUser
 ]
 
 { #category : #methods }
@@ -59,15 +53,6 @@ CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosSt
 	anUser agregarPregunta: p.
 	preguntas add: p.
 	^ p
-]
-
-{ #category : #methods }
-CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj [
-	| r |
-	r := Respuesta newRespuesta: descripcionStr.
-	preguntaObj agregarRespuesta: r.
-	^r.
-	"DEBERIAMOS DE AGREGARO LOS OBJETOS CAMBIADOS A LA LISTA OTRA VEZ????"
 ]
 
 { #category : #methods }
@@ -218,10 +203,17 @@ CuOOra >> setearVariables [
 		descripcion: ''
 		topicos: tList
 		usuario: u2.
-		
+
 	"Respuesta"
-	r1 := self altaRespuesta: 'Sirve para instanciar los objetos que son evaluados por el test en un unico metodo y que se ejecute siempre antes de cada test.' pregunta: p1 .
-	r2 := self altaRespuesta: 'Significa que el objeto que recibio el mensaje no encontro ningun metodo para ejecutar en respuesta.' pregunta: p2.
+	r1 := self
+		altaRespuesta:
+			'Sirve para instanciar los objetos que son evaluados por el test en un unico metodo y que se ejecute siempre antes de cada test.'
+		pregunta: p1
+		usuario: u3.
+	r2 := self
+		altaRespuesta:
+			'Significa que el objeto que recibio el mensaje no encontro ningun metodo para ejecutar en respuesta.'
+		pregunta: p2 usuario: u1.
 ]
 
 { #category : #accessing }

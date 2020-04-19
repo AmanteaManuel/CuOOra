@@ -66,8 +66,8 @@ CuOOraTest >> testAltaLikeDe [
 ]
 
 { #category : #test }
-CuOOraTest >> testAltaPreguntaDescripcionTopicos [
-	| p t tList |
+CuOOraTest >> testAltaPreguntaDescripcionTopicosUsuario [
+	| p |
 	"como regla de negocio el topico ya debe estar cargado en el sistema."
 	p := sistema
 		altaPregunta: 'collect pharo'
@@ -79,10 +79,13 @@ CuOOraTest >> testAltaPreguntaDescripcionTopicos [
 ]
 
 { #category : #test }
-CuOOraTest >> testAltaRespuestaPregunta [
+CuOOraTest >> testAltaRespuestaPreguntaUsuario [
 	| p r |
 	p := sistema preguntas first.
-	r := sistema altaRespuesta: 'La solucion es...' pregunta: p usuario: usuarioLogueado.
+	r := sistema
+		altaRespuesta: 'La solucion es...'
+		pregunta: p
+		usuario: usuarioLogueado.
 	self assert: (p respuestas includes: r)
 ]
 
@@ -97,7 +100,7 @@ CuOOraTest >> testAltaTopicoDescripcion [
 ]
 
 { #category : #test }
-CuOOraTest >> testAltaTopicoInteres [
+CuOOraTest >> testAltaTopicoInteresDe [
 	| t |
 	"Toma el ultimo de los topicos de la lista, y lo agrega como topico de interes
 	del usuario."
