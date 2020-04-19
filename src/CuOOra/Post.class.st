@@ -77,6 +77,13 @@ Post >> fecha: date [
 ]
 
 { #category : #accesing }
+Post >> fechaYHora [
+
+^ (DateAndTime year: (fecha year) day:(fecha day) hour:(hora hour) minute: (hora minute) second: (hora second)).
+	
+]
+
+{ #category : #accesing }
 Post >> hora [
 	^ hora.
 ]

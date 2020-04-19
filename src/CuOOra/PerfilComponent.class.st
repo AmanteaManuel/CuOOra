@@ -27,7 +27,7 @@ PerfilComponent >> renderBody: aCanvas [
 						[ self session model usuario: self session usuario seguirA: usuario ];
 				with: 'Follow' ].
 	aCanvas heading with: 'Preguntas de ' , usuario nombreUsuario.
-	preguntas := self session model obtenerPreguntasUsuario: usuario.
+	preguntas := self session model ultimasCincoPreguntasDe:usuario.
 	aCanvas horizontalRule.
 	preguntas
 		do: [ :pregunta | 

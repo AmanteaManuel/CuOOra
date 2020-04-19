@@ -173,8 +173,7 @@ Usuario >> preguntasTopicos: preguntasSistema [
 		do: [ :p | 
 			self topicosDeInteres
 				do: [ :topico | 
-					p
-						perteneceATopico: topico;
+					(p	perteneceATopico: topico)
 						ifTrue: [ returnList add: p ] ] ].
 	^ returnList
 ]

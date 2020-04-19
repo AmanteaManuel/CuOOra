@@ -11,14 +11,19 @@ MasterComponent >> renderHeader: aCanvas [
 		with: [ aCanvas heading with: 'CuOOra'.
 			aCanvas div
 				id: 'usuarioencabezado';
-				with: [ aCanvas
-						render: 'Usuario: ' , self session usuario nombreUsuario , ' '.
+				with: [ 
+					aCanvas anchor
+					id:'perfilUri';
+						callback: [self call: (PerfilComponent newPerfil: (self session usuario))];
+						with:[
+					aCanvas
+						render: 'Usuario:  ' , self session usuario nombreUsuario , ' '].
 					aCanvas anchor
 						callback: [ self call: HomeComponent new ];
-						with: 'Home |'.
+						with: ' Home | '.
 					aCanvas anchor
 						callback: [ self call: NuevaPreguntaComponent nuevaPreguntaComponent ];
-						with: ' Log Out' ] ].
+						with: '  Log Out' ] ].
 	aCanvas horizontalRule.
 	aCanvas break
 ]
@@ -34,7 +39,7 @@ MasterComponent >> renderPregunta: pregunta canvas: aCanvas [
 		with: [ aCanvas paragraph with: 'Topicos: ' , pregunta topicosComoString ].
 	aCanvas
 		paragraph: [ aCanvas render: 'Realizada por: '.
-			aCanvas anchor
+			aCanvas anchor				
 				callback: [ self call: (PerfilComponent newPerfil: pregunta usuario) ];
 				with: pregunta usuario nombreUsuario ].
 	aCanvas
@@ -60,7 +65,8 @@ MasterComponent >> style [
 	^ '
 	#usuarioencabezado{
 		text-align:right;
-		margin-right:50px
+		margin-right:50px;
+		font-weight: bold;
 	}
 	
 	#btnFallow{
@@ -75,5 +81,9 @@ MasterComponent >> style [
 	#tituloPregunta{}
 	#nombreOwnerPregunta{ text-decoration: overline;}
 	#formInput{ width: 100%;}
+	#perfilUri{
+	color: #3399ff;
+	font-weight: bold;
+	}
 	'
 ]
