@@ -50,12 +50,9 @@ PreguntaTest >> testObtenerRespuestasPorPuntaje [
 	r1 darLike: u1.
 	r1 darLike: u2.
 	r2 darDislike: u1.
-	list := OrderedCollection new.
-	list add: r1.
-	list add: r2.
-	ord := list
-		asSortedCollection:
-			[ :rta1 :rta2 | rta1 diferenciaLikesDislikes > rta2 diferenciaLikesDislikes ].
+	pregunta respuestas  add: r1.
+	pregunta respuestas  add: r2.
+	ord := pregunta obtenerRespuestasPorPuntaje.
 	self assert: (ord at: 1) = r1.
 	self assert: (ord at: 2) = r2
 ]
