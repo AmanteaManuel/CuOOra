@@ -67,7 +67,7 @@ MasterComponent >> renderPregunta: pregunta canvas: aCanvas [
 				with: 'Like'.
 			aCanvas text: '|'.
 			aCanvas anchor
-				callback: [ self session model altaDislike: pregunta ];
+				callback: [ self session model altaDislike: pregunta de: self session usuario ];
 				with: 'Dislike' ]
 ]
 

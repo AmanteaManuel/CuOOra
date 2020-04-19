@@ -28,7 +28,7 @@ CuOOra class >> soleInstance [
 
 { #category : #methods }
 CuOOra >> altaDislike: post de: anUser [
-	^ post darLike: anUser
+	^ post darDislike: anUser
 ]
 
 { #category : #methods }
@@ -64,8 +64,7 @@ CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |
 	topico := self validarTopico: nombreStr.
 	topico ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-						 topicos add: topico ]
-			ifNotNil: [ ^nil ].
+						 topicos add: topico ].			
 	^ topico
 ]
 
