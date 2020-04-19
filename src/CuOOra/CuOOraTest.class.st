@@ -115,7 +115,7 @@ CuOOraTest >> testAltaUsuarioContrasenia [
 	| u |
 	u := sistema altaUsuario: 'usuarioNuevo' contrasenia: '123'.
 	self assert: (sistema usuarios includes: u).
-	u := sistema altaUsuario: 'cami' contrasenia: '123'.
+	u := sistema altaUsuario: 'user' contrasenia: '123'.
 	self deny: (sistema usuarios includes: u)
 ]
 

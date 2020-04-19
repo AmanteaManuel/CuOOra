@@ -66,6 +66,11 @@ Post >> descripcion: unString [
 	descripcion:= unString.
 ]
 
+{ #category : #methods }
+Post >> diferenciaLikesDislikes [
+	^ self cantLikes - self cantDislikes.
+]
+
 { #category : #accesing }
 Post >> fecha [
 	^fecha.

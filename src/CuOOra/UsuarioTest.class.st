@@ -101,7 +101,10 @@ UsuarioTest >> testDiferenciaLikeDislikesPreguntas [
 
 { #category : #test }
 UsuarioTest >> testDiferenciaLikeDislikesRespuestas [
-	self assert: [ usuario diferenciaLikeDislikesRespuestas = -1 ]
+	| dif |
+	dif := usuario diferenciaLikeDislikesRespuestas.
+	 self
+		assert: [ dif = -1 ]
 ]
 
 { #category : #test }
@@ -128,6 +131,11 @@ UsuarioTest >> testObtenerRespuestas [
 	|list|
 	list:= usuario obtenerRespuestas.
 	self assert: [list size = 1].
+]
+
+{ #category : #test }
+UsuarioTest >> testObtenerRespuestasPorPuntaje [
+
 ]
 
 { #category : #test }
