@@ -5,25 +5,36 @@ Class {
 }
 
 { #category : #rendering }
+MasterComponent >> logOut [
+	self session unregister.
+	self requestContext redirectTo: self application url. 
+]
+
+{ #category : #rendering }
 MasterComponent >> renderHeader: aCanvas [
 	aCanvas div
 		id: 'titulo';
 		with: [ aCanvas heading with: 'CuOOra'.
 			aCanvas div
 				id: 'usuarioencabezado';
-				with: [ 
+				with: [
+					aCanvas label with: 'Usuario: ' .
 					aCanvas anchor
 					id:'perfilUri';
 						callback: [self call: (PerfilComponent newPerfil: (self session usuario))];
 						with:[
 					aCanvas
-						render: 'Usuario:  ' , self session usuario nombreUsuario , ' '].
+						render:self session usuario nombreUsuario].
+					aCanvas space.
+					aCanvas space.
 					aCanvas anchor
 						callback: [ self call: HomeComponent new ];
-						with: ' Home | '.
+						with: 'Home'.
+						aCanvas space.
+						aCanvas space.
 					aCanvas anchor
-						callback: [ self call: NuevaPreguntaComponent nuevaPreguntaComponent ];
-						with: '  Log Out' ] ].
+						callback: [ self logOut ];
+						with: 'Log Out' ] ].
 	aCanvas horizontalRule.
 	aCanvas break
 ]
