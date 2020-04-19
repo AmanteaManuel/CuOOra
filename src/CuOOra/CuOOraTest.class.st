@@ -93,11 +93,11 @@ CuOOraTest >> testAltaRespuestaPreguntaUsuario [
 
 { #category : #test }
 CuOOraTest >> testAltaTopicoDescripcion [
-	| t |
+	| t top |
 	t := sistema altaTopico: 'Programacion' descripcion: 'prueba'.
 	self assert: (sistema topicos includes: t).
 	"Pruebo con un topico que ya exista."
-	t := sistema altaTopico: 'POO' descripcion: 'prueba'.
+	t := sistema altaTopico: 'POO' descripcion: 'POO'.
 	self deny: (sistema topicos includes: t)
 ]
 
@@ -150,25 +150,36 @@ CuOOraTest >> testNombreUsuarioContrasenia [
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasRelevantesUsuario [
-	|topicoInteres follow randomUser user preg1 preg2 preg3 preguntasRelevantes|
-	
-	user:= sistema usuarios detect: [ :u |  u nombreUsuario = 'user'].	
-	topicoInteres:= sistema topicos detect: [ :t |  t nombre = 'POO'].
-	follow:= sistema altaUsuario: 'follow' contrasenia: '123'.	
-	randomUser:= sistema altaUsuario: 'randomUser' contrasenia: '123'.
+	| topicoInteres follow randomUser user preg1 preg2 preg3 preguntasRelevantes |
+	user := sistema usuarios detect: [ :u | u nombreUsuario = 'user' ].
+	topicoInteres := sistema topicos detect: [ :t | t nombre = 'POO' ].
+	follow := sistema altaUsuario: 'follow' contrasenia: '123'.
+	randomUser := sistema altaUsuario: 'randomUser' contrasenia: '123'.
 	"pregunta por follow"
-	preg1:= sistema altaPregunta: 'TestUI' descripcion: 'ayuda!' topicos: 'TestUI' usuario: follow.
+	preg1 := sistema
+		altaPregunta: 'TestUI'
+		descripcion: 'ayuda!'
+		topicos: 'TestUI'
+		usuario: follow.
 	"pregunta por topico"
-	preg2:= sistema altaPregunta: 'Test' descripcion: 'ayuda!' topicos: 'POO' usuario: randomUser.
+	preg2 := sistema
+		altaPregunta: 'Test'
+		descripcion: 'ayuda!'
+		topicos: 'POO, Programming'
+		usuario: randomUser.
 	"no debe estar"
-	preg3:= sistema altaPregunta: 'TestFalse' descripcion: 'ayuda!' topicos: 'False' usuario: randomUser.
+	preg3 := sistema
+		altaPregunta: 'TestFalse'
+		descripcion: 'ayuda!'
+		topicos: 'False'
+		usuario: randomUser.
 	sistema usuario: user seguirA: follow.
-	sistema altaTopicoInteres: topicoInteres de: user. 
-	
-	preguntasRelevantes:= sistema obtenerPreguntasRelevantesUsuario: user.
-	self assert: (preguntasRelevantes includes:preg1).
-	self assert: (preguntasRelevantes includes:preg2).
-	self deny: (preguntasRelevantes includes:preg3).
+	sistema altaTopicoInteres: topicoInteres de: user.
+	preguntasRelevantes := sistema
+		obtenerPreguntasRelevantesUsuario: user.
+	self assert: (preguntasRelevantes includes: preg1).
+	self assert: (preguntasRelevantes includes: preg2).
+	self deny: (preguntasRelevantes includes: preg3)
 ]
 
 { #category : #test }
@@ -197,5 +208,5 @@ CuOOraTest >> testValidarTopico [
 	list := sistema validarTopico: 'Consultas'.
 	self assert: list isNil.
 	list := sistema validarTopico: 'SQL'.
-	self assert: list isNotNil
+	self assert: list isNotNil.
 ]

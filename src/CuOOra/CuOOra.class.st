@@ -39,7 +39,7 @@ CuOOra >> altaLike: post de: anUser [
 { #category : #methods }
 CuOOra >> altaPregunta: tituloStr descripcion: descripcionStr topicos: topicosStr usuario: anUser [
 	| p topicosList |
-	topicosList := self generarListaTopicos: topicosStr.
+	topicosList := (self generarListaTopicos: topicosStr).
 	p := Pregunta
 		newPregunta: tituloStr
 		descripcion: descripcionStr
@@ -63,9 +63,9 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj usuario: anUser [
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |
 	topico := self validarTopico: nombreStr.
-	topico ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-						 topicos add: topico ].			
-	^ topico
+	topico
+		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
+			^ topicos add: topico ].
 ]
 
 { #category : #methods }

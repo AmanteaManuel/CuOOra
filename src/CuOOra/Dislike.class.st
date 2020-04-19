@@ -37,11 +37,6 @@ Dislike class >> newDislike: usuarioObj [
 	
 ]
 
-{ #category : #methods }
-Dislike >> initialize [ 
-	fechaHora := DateAndTime now.
-]
-
 { #category : #initialization }
 Dislike >> soyLike [
 	^ false

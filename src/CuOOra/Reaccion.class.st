@@ -11,6 +11,11 @@ Class {
 	#category : #'CuOOra-Model'
 }
 
+{ #category : #methods }
+Reaccion >> initialize [ 
+	fechaHora := DateAndTime now.
+]
+
 { #category : #initialization }
 Reaccion >> soyLike [
 	self subclassResponsibility 

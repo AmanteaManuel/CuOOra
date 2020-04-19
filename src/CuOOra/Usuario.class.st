@@ -108,11 +108,6 @@ Usuario >> follows [
 	^ follows
 ]
 
-{ #category : #accessing }
-Usuario >> follows: anObject [
-	follows := anObject
-]
-
 { #category : #initialization }
 Usuario >> initialize [
 	fechaHora := DateAndTime now.
@@ -144,11 +139,6 @@ Usuario >> obtenerRespuestas [
 { #category : #accessing }
 Usuario >> posts [
 	^ posts
-]
-
-{ #category : #accessing }
-Usuario >> posts: anObject [
-	posts := anObject
 ]
 
 { #category : #methods }
@@ -193,11 +183,6 @@ Usuario >> seguirUsuario: unUsuario [
 { #category : #methods }
 Usuario >> sigueAUsuario: unUsuario [
 	^ follows includes: unUsuario
-]
-
-{ #category : #methods }
-Usuario >> tienePregunta: unaPregunta [
-^ self obtenerPreguntas anySatisfy: [ :preg | preg = unaPregunta ]
 ]
 
 { #category : #accessing }
