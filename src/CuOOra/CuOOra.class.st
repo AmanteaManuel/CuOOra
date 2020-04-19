@@ -109,7 +109,7 @@ CuOOra >> generarListaTopicos: topicoslist [
 		^list.
 ]
 
-{ #category : #methods }
+{ #category : #initialization }
 CuOOra >> initialize [
 	usuarios := OrderedCollection new.
 	topicos := OrderedCollection new.
@@ -154,7 +154,7 @@ CuOOra >> preguntas: anObject [
 	preguntas := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CuOOra >> setearVariables [
 	| u1 u2 u3 t1 t2 t3 p1 p2 r1 r2 tList |
 	"Agregar usuarios"

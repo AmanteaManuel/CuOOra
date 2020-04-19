@@ -12,7 +12,7 @@ PreguntaComponent class >> newPregunta: unaPregunta [
 	^ self new pregunta: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #methods }
 PreguntaComponent >> agregarRespuesta [
 	| unaRespuesta |
 	unaRespuesta := Respuesta new.
@@ -45,7 +45,7 @@ PreguntaComponent >> initialize [
 	pregunta := p"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PreguntaComponent >> pregunta: unaPregunta [ 
 	pregunta := unaPregunta.
 ]
@@ -111,11 +111,11 @@ PreguntaComponent >> renderRespuesta: unaRespuesta on: aCanvas [
 								, 'Cantidad Dislikes ' , unaRespuesta cantDislikes printString ].
 			aCanvas
 				paragraph: [ aCanvas anchor
-						callback: [ self session model altaLike: unaRespuesta ];
+						callback: [ self session model altaLike: unaRespuesta de: self session usuario ];
 						with: 'Like'.
 					aCanvas text: '|'.
 					aCanvas anchor
-						callback: [ self session model altaDislike: unaRespuesta ];
+						callback: [ self session model altaDislike: unaRespuesta de: self session usuario ];
 						with: 'Dislike' ].
 			aCanvas horizontalRule ]
 ]
