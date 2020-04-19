@@ -134,11 +134,6 @@ UsuarioTest >> testObtenerRespuestas [
 ]
 
 { #category : #test }
-UsuarioTest >> testObtenerRespuestasPorPuntaje [
-
-]
-
-{ #category : #test }
 UsuarioTest >> testSeguirUsuario [
 	| u1 |
 	u1 := Usuario newNombreUsuario: 'Manuel' contrasenia: '123'.

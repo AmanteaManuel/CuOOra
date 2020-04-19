@@ -41,6 +41,26 @@ self assert: (pregunta respuestas includes:r).
 ]
 
 { #category : #test }
+PreguntaTest >> testObtenerRespuestasPorPuntaje [
+	| r1 r2 u1 u2 list ord |
+	r1 := Respuesta new.
+	r2 := Respuesta new.
+	u1 := Usuario new.
+	u2 := Usuario new.
+	r1 darLike: u1.
+	r1 darLike: u2.
+	r2 darDislike: u1.
+	list := OrderedCollection new.
+	list add: r1.
+	list add: r2.
+	ord := list
+		asSortedCollection:
+			[ :rta1 :rta2 | rta1 diferenciaLikesDislikes > rta2 diferenciaLikesDislikes ].
+	self assert: (ord at: 1) = r1.
+	self assert: (ord at: 2) = r2
+]
+
+{ #category : #test }
 PreguntaTest >> testPerteneceATopico [
 	| t |
 	t := Topico
