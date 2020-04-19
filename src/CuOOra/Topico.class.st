@@ -30,8 +30,8 @@ Topico >> descripcion:unaDescripcion [
 
 { #category : #methods }
 Topico >> existeNombre: nombreStr [
-	"^ nombre asUppercase = nombreStr asUppercase"
-	^ nombre = nombreStr
+	^ nombre = nombreStr.
+	
 ]
 
 { #category : #accesing }
