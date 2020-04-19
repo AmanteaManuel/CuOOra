@@ -32,11 +32,6 @@ CuOOra >> altaDislike: post de: anUser [
 ]
 
 { #category : #methods }
-CuOOra >> altaFollow: anUser a: anotherUser [
-	self usuario: anUser seguirA: anotherUser
-]
-
-{ #category : #methods }
 CuOOra >> altaLike: post de: anUser [
 	^ post darLike: anUser
 ]
@@ -66,11 +61,12 @@ CuOOra >> altaRespuesta: descripcionStr pregunta: preguntaObj usuario: anUser [
 
 { #category : #methods }
 CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
-	| topico |	
+	| topico |
 	topico := self validarTopico: nombreStr.
-	topico isNil;
+	topico
+		isNil;
 		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-			topicos add: topico ].
+				topicos add: topico ].
 	^ topico
 ]
 

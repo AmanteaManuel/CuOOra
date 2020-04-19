@@ -58,6 +58,14 @@ CuOOraTest >> setUp [
 ]
 
 { #category : #test }
+CuOOraTest >> testAltaDislikeDe [
+	| p |
+	p := Pregunta new.
+	sistema altaDislike: p de: usuarioLogueado.
+	self assert: (p reacciones size = 1)
+]
+
+{ #category : #test }
 CuOOraTest >> testAltaLikeDe [
 	| p |
 	p := sistema preguntas last.
@@ -140,6 +148,12 @@ CuOOraTest >> testExisteNombreUsuario [
 ]
 
 { #category : #test }
+CuOOraTest >> testNombreUsuarioContrasenia [
+	self
+		assert: (sistema nombreUsuario: 'user' contrasenia: '123' isNotNil)
+]
+
+{ #category : #test }
 CuOOraTest >> testObtenerPreguntasRelevantesUsuario [
 	| t |
 	t := sistema topicos last.
@@ -157,6 +171,14 @@ CuOOraTest >> testObtenerPreguntasUsuario [
 CuOOraTest >> testObtenerRespuestasUsuario [
 	self assert: [ (sistema obtenerRespuestasUsuario: usuarioLogueado)
 		size = 1 ]
+]
+
+{ #category : #test }
+CuOOraTest >> testUsuarioSeguirA [
+	|u1|
+	u1 := Usuario new.
+	sistema usuario: usuarioLogueado seguirA: u1.
+	self assert:(usuarioLogueado follows includes: u1). 
 ]
 
 { #category : #test }
