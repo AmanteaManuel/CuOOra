@@ -70,7 +70,7 @@ UsuarioTest >> testAgregarTopicoInteres [
 	topicoFail := top.
 	usuario agregarTopicoInteres: topico.
 	self
-		assert: [ (usuario topicosInteres select: [ :t | t nombre = 'Base de datos' ])
+		assert: [ (usuario topicosDeInteres select: [ :t | t nombre = 'Base de datos' ])
 				size = 1 ].
 	usuario agregarTopicoInteres: topicoFail
 	"self
@@ -121,13 +121,6 @@ UsuarioTest >> testObtenerPreguntas [
 	| list |
 	list := usuario obtenerPreguntas.
 	self assert: [ list size = 1 ]
-]
-
-{ #category : #test }
-UsuarioTest >> testObtenerPreguntasRelevantes [
-
-	self flag: #toImplement.
-	self assert: false
 ]
 
 { #category : #test }

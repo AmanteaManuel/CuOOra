@@ -5,7 +5,6 @@ Class {
 	#name : #CuOOra,
 	#superclass : #Object,
 	#instVars : [
-		'usuarioLogueado',
 		'usuarios',
 		'topicos',
 		'preguntas'
@@ -41,6 +40,11 @@ CuOOra >> altaFollow:user [
 { #category : #methods }
 CuOOra >> altaLike: post [
 	^ post darLike: usuarioLogueado
+]
+
+{ #category : #methods }
+CuOOra >> altaLike: post de: anUser [
+	^ post darLike: anUser
 ]
 
 { #category : #methods }
@@ -87,9 +91,9 @@ CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 ]
 
 { #category : #methods }
-CuOOra >> altaTopicoInteres: topicoObj [
-	usuarioLogueado agregarTopicoInteres: topicoObj.
-	^topicoObj
+CuOOra >> altaTopicoInteres: topicoObj de: anUser [
+	anUser agregarTopicoInteres: topicoObj.
+	^ topicoObj
 ]
 
 { #category : #methods }
@@ -242,17 +246,7 @@ CuOOra >> ultimasCincoRelevantes:usuario [
 
 { #category : #'as yet unclassified' }
 CuOOra >> usuario: unUsuarioLogueado seguirA: otroUsuario [
-	^ (unUsuarioLogueado seguirUsuario: otroUsuario).
-]
-
-{ #category : #accessing }
-CuOOra >> usuarioLogueado [
-	^ usuarioLogueado
-]
-
-{ #category : #accessing }
-CuOOra >> usuarioLogueado: anObject [
-	usuarioLogueado := anObject
+	 unUsuarioLogueado seguirUsuario: otroUsuario
 ]
 
 { #category : #accessing }

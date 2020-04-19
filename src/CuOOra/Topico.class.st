@@ -29,8 +29,9 @@ Topico >> descripcion:unaDescripcion [
 ]
 
 { #category : #methods }
-Topico >> existeNombre:nombreStr [
-	^(nombre asUppercase = nombreStr asUppercase)
+Topico >> existeNombre: nombreStr [
+	"^ nombre asUppercase = nombreStr asUppercase"
+	^ nombre = nombreStr
 ]
 
 { #category : #accesing }
