@@ -84,20 +84,16 @@ Usuario >> darLike: unPost [
 
 { #category : #methods }
 Usuario >> diferenciaLikeDislikesPreguntas [
-	| preguntas cantLikes cantDislikes |
+	| preguntas |
 	preguntas := self obtenerPreguntas.
-	cantLikes := preguntas sum: [ :preg | preg cantLikes ].
-	cantDislikes := preguntas sum: [ :preg | preg cantDislikes ].
-	^ cantLikes - cantDislikes
+	^ preguntas sum: [ :pregunta | pregunta diferenciaLikesDislikes ]
 ]
 
 { #category : #methods }
 Usuario >> diferenciaLikeDislikesRespuestas [
-	| respuestas cantLikes cantDislikes |
+	| respuestas |
 	respuestas := self obtenerRespuestas.
-	cantLikes := respuestas sum: [ :resp | resp cantLikes ] .
-	cantDislikes := respuestas sum: [ :resp | resp cantDislikes ].
-	^ cantLikes - cantDislikes
+	^ respuestas sum: [ :respuesta | respuesta diferenciaLikesDislikes ]
 ]
 
 { #category : #methods }
@@ -143,6 +139,14 @@ Usuario >> obtenerPreguntas [
 { #category : #methods }
 Usuario >> obtenerRespuestas [
 	^ posts select: [ :pregunta | pregunta soyPregunta not ]
+]
+
+{ #category : #methods }
+Usuario >> obtenerRespuestasPorPuntaje [
+	| list |
+	list := SortedCollection new.
+	list asSortedCollection: [ :r1 :r2 | r1 diferenciaLikesDislikes < r2 diferenciaLikesDislikes ].
+	^ list
 ]
 
 { #category : #accessing }

@@ -13,12 +13,27 @@ Class {
 
 { #category : #running }
 PostTest >> setUp [
-	|topicos |
-	usuario:= Usuario newNombreUsuario: 'Manuel' contrasenia:'Amantea'. 
-	topicos:= OrderedCollection new.
-	topicos add: [ Topico newTopico: 'SQL' descripcion:'base de datos'  ].
-	pregunta:= Pregunta newPregunta: 'pregunta prueba' descripcion:'asd'  topicos: topicos.	
+	| topicos |
+	usuario := Usuario newNombreUsuario: 'Manuel' contrasenia: 'Amantea'.
+	topicos := OrderedCollection new.
+	topicos add: [ Topico newTopico: 'SQL' descripcion: 'base de datos' ].
+	pregunta := Pregunta
+		newPregunta: 'pregunta prueba'
+		descripcion: 'asd'
+		topicos: topicos.
+]
 
+{ #category : #test }
+PostTest >> testDiferenciaLikesDislikes [
+|u1 u2 u3|
+u1 := Usuario new.
+u2 := Usuario new.
+u3 := Usuario new.
+u1 darLike: pregunta.
+u2 darLike: pregunta.
+u3 darDislike: pregunta.
+self assert:(pregunta diferenciaLikesDislikes=1)
+	
 ]
 
 { #category : #test }
