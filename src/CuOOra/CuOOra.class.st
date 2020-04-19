@@ -28,7 +28,7 @@ CuOOra class >> soleInstance [
 
 { #category : #methods }
 CuOOra >> altaDislike: post de: anUser [
-	^ post darLike: anUser
+	^ post darDislike: anUser
 ]
 
 { #category : #methods }
