@@ -20,6 +20,7 @@ CuOOraTest >> setUp [
 	usuario := Usuario newNombreUsuario: 'user' contrasenia: '123'.
 	sistema usuarios add: usuario.
 	usuarioLogueado := usuario.
+	
 	"-----------------------------------------------------------"
 	"Agrego topicos"
 	t1 := Topico newTopico: 'SQL' descripcion: 'prueba'.
@@ -115,7 +116,7 @@ CuOOraTest >> testAltaUsuarioContrasenia [
 	| u |
 	u := sistema altaUsuario: 'usuarioNuevo' contrasenia: '123'.
 	self assert: (sistema usuarios includes: u).
-	u := sistema altaUsuario: 'cami' contrasenia: '123'.
+	u := sistema altaUsuario:'user' contrasenia: '123'.
 	self deny: (sistema usuarios includes: u)
 ]
 
@@ -136,22 +137,38 @@ CuOOraTest >> testCalcularPuntajeUsuario [
 
 { #category : #test }
 CuOOraTest >> testExisteNombreUsuario [
-	self assert: (sistema existeNombreUsuario:'cami').
+	self assert: (sistema existeNombreUsuario:'user').
 	self deny: (sistema existeNombreUsuario:'nombreDisponible').
 ]
 
 { #category : #test }
 CuOOraTest >> testNombreUsuarioContrasenia [
 	self
-		assert: (sistema nombreUsuario: 'user' contrasenia: '123' isNotNil)
+		assert: ((sistema nombreUsuario: 'user' contrasenia: '123') isNotNil);
+		deny: ((sistema nombreUsuario: 'user' contrasenia: 'asd') isNotNil).
 ]
 
 { #category : #test }
 CuOOraTest >> testObtenerPreguntasRelevantesUsuario [
-	| t |
-	t := sistema topicos last.
-	sistema altaTopicoInteres: t.
-	self assert: sistema obtenerPreguntasRelevantesUsuario size equals: 1
+	|topicoInteres follow randomUser user preg1 preg2 preg3 preguntasRelevantes|
+	
+	user:= sistema usuarios detect: [ :u |  u nombreUsuario = 'user'].	
+	topicoInteres:= sistema topicos detect: [ :t |  t nombre = 'POO'].
+	follow:= sistema altaUsuario: 'follow' contrasenia: '123'.	
+	randomUser:= sistema altaUsuario: 'randomUser' contrasenia: '123'.
+	"pregunta por follow"
+	preg1:= sistema altaPregunta: 'TestUI' descripcion: 'ayuda!' topicos: 'TestUI' usuario: follow.
+	"pregunta por topico"
+	preg2:= sistema altaPregunta: 'Test' descripcion: 'ayuda!' topicos: 'POO' usuario: randomUser.
+	"no debe estar"
+	preg3:= sistema altaPregunta: 'TestFalse' descripcion: 'ayuda!' topicos: 'False' usuario: randomUser.
+	sistema usuario: user seguirA: follow.
+	sistema altaTopicoInteres: topicoInteres de: user. 
+	
+	preguntasRelevantes:= sistema obtenerPreguntasRelevantesUsuario: user.
+	self assert: (preguntasRelevantes includes:preg1).
+	self assert: (preguntasRelevantes includes:preg2).
+	self deny: (preguntasRelevantes includes:preg3).
 ]
 
 { #category : #test }

@@ -64,8 +64,7 @@ CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |
 	topico := self validarTopico: nombreStr.
 	topico ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-						 topicos add: topico ]
-			ifNotNil: [ ^nil ].
+						 topicos add: topico ].			
 	^ topico
 ]
 
