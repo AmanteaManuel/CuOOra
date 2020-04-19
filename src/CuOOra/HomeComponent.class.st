@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 HomeComponent >> initialize [
 	preguntas := self session model
-		obtenerPreguntasRelevantesUsuario: self session usuario
+		ultimasCincoRelevantes: self session usuario
 	"	|p t tList rList u1 u2|
 	rList:= OrderedCollection new.	
 	tList:= OrderedCollection new.
@@ -63,14 +63,21 @@ HomeComponent >> renderContentOn: aCanvas [
 { #category : #accessing }
 HomeComponent >> style [
 	^ '
-	#usuarioencabezado{text-align:right;
+	#usuarioencabezado{
+		text-align:right;
+		margin-right:50px;
+		font-weight: bold;
 	}
 	
 	#agregarPregunta{text-align:right;
 	}
 	#titulo{
 				font-size: 21;						
-		 		text-align: center;
+		 		text-align: center;			
 			}
+	#perfilUri{
+	color: #3399ff;
+	font-weight: bold;
+	}
 	'
 ]

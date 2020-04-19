@@ -192,7 +192,7 @@ CuOOra >> setearVariables [
 	p1 := self
 		altaPregunta: '¿Para qué sirve el metodo setUp?'
 		descripcion: ''
-		topicos: tList
+		topicos: 'OO1,Test de unidad'
 		usuario: u1.
 	tList := OrderedCollection new.
 	tList add: t1.
@@ -200,7 +200,7 @@ CuOOra >> setearVariables [
 	p2 := self
 		altaPregunta: '¿Qué significa #messageNotUnderstood?'
 		descripcion: ''
-		topicos: tList
+		topicos: 'OO1,Smalltalk'
 		usuario: u2.
 
 	"Respuesta"
@@ -226,12 +226,28 @@ CuOOra >> topicos: anObject [
 ]
 
 { #category : #methods }
+CuOOra >> ultimasCincoPreguntasDe:usuario [
+	| p |
+	p := self obtenerPreguntasUsuario:usuario.
+	^ self ultimosCinco: p.
+]
+
+{ #category : #methods }
 CuOOra >> ultimasCincoRelevantes:usuario [
 	| p |
-	p := usuario obtenerPreguntasRelevantes.
-	p size > 5
-		ifTrue: [ ^ p last: 5 ]
-		ifFalse: [ ^ p ]
+	p := self obtenerPreguntasRelevantesUsuario:usuario.
+	^ self ultimosCinco: p.
+]
+
+{ #category : #methods }
+CuOOra >> ultimosCinco:posteo [
+	|list|
+	list:= posteo asSortedCollection: [ :p1 :p2 | p1 fechaYHora > p2 fechaYHora  ].
+	list size > 5
+		ifTrue: [ ^ list last: 5 ]
+		ifFalse: [ ^ list ]
+		
+	
 ]
 
 { #category : #methods }

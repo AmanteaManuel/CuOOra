@@ -51,7 +51,7 @@ Pregunta >> initialize [
 
 { #category : #methods }
 Pregunta >> perteneceATopico:unTopico [
-	^ [topicos includes:unTopico]
+	^ topicos includes:unTopico
 ]
 
 { #category : #accesing }

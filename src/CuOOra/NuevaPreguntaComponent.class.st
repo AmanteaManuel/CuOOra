@@ -21,7 +21,8 @@ NuevaPreguntaComponent >> crearPregunta [
 				altaPregunta: titulo
 				descripcion: descripcion
 				topicos: topicos 
-				usuario: self session usuario]
+				usuario: self session usuario].
+	self answer.
 ]
 
 { #category : #accessing }
