@@ -27,11 +27,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-Dislike class >> newDislike [
-	^self new.
-]
-
-{ #category : #'instance creation' }
 Dislike class >> newDislike: usuarioObj [
 	^ self new usuario: usuarioObj
 	

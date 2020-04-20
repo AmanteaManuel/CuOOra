@@ -13,7 +13,7 @@ Class {
 
 { #category : #running }
 UsuarioTest >> setUp [
-	| topicos t like dislike p r u1 u2 u3 |
+	| topicos t like dislike p r u1 u2 u3 u4 |
 	t := Topico newTopico: 'SQL' descripcion: 'topico sql'.
 	topicos := OrderedCollection new.
 	topicos add: t.
@@ -26,8 +26,10 @@ UsuarioTest >> setUp [
 	p := Pregunta
 		newPregunta: 'select?'
 		descripcion: 'como se hace un select'
-		topicos: topicos.
-	r := Respuesta newRespuesta: 'esta mal escrito el metodo'.
+		topicos: topicos
+		usuario:u4.
+	u4:= Usuario newNombreUsuario: 'uu1' contrasenia:'123'.
+	r := Respuesta newRespuesta: 'esta mal escrito el metodo' usuario:u4.
 	"---------------------------------------------------------"
 	like := Like newLike: u2.
 	p reacciones add: like.
@@ -42,21 +44,24 @@ UsuarioTest >> setUp [
 
 { #category : #test }
 UsuarioTest >> testAgregarPregunta [
-	| preg |
+	| preg u|
+	u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
 	preg := usuario posts
 		add:
 			(Pregunta
 				newPregunta: 'select?'
 				descripcion: 'como se hace un select'
-				topicos: 'SQL').
+				topicos: 'SQL'
+				usuario:u).
 	usuario agregarPregunta: preg.
 	self assert: (usuario posts includes: preg)
 ]
 
 { #category : #test }
 UsuarioTest >> testAgregarRespuesta [
-	| resp |
-	resp := usuario posts add: (Respuesta newRespuesta: 'te falta el ;').
+	| resp u|
+	u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
+	resp := usuario posts add: (Respuesta newRespuesta: 'te falta el ;' usuario:u).
 	usuario agregarRespuesta: resp.
 	self assert: (usuario posts includes: resp)
 ]
@@ -109,11 +114,13 @@ UsuarioTest >> testDiferenciaLikeDislikesRespuestas [
 
 { #category : #test }
 UsuarioTest >> testEliminarPregunta [
-|preguntaBorrar|
+|preguntaBorrar u|
+u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
 	preguntaBorrar := Pregunta
 		newPregunta: 'delete?'
 		descripcion: 'como se hace un delte'
-		topicos: (OrderedCollection new).
+		topicos: ''
+		usuario: u.
 		usuario agregarPregunta: preguntaBorrar.		
 	usuario eliminarPregunta: preguntaBorrar.
 	self assert: [ usuario posts includes: preguntaBorrar ].

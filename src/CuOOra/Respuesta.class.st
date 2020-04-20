@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-Respuesta class >> newRespuesta:descripcionStr [
-	^ self new	
-		descripcion: descripcionStr.
-]
-
-{ #category : #'instance creation' }
 Respuesta class >> newRespuesta: descripcionStr usuario:anUser [
 	^ self new descripcion: descripcionStr; usuario:anUser.
 ]

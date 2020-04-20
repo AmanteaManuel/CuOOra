@@ -13,7 +13,8 @@ Class {
 
 { #category : #running }
 PreguntaTest >> setUp [
-	| t t1 preg |
+	| t t1 preg u|
+	u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
 	t := OrderedCollection new.
 	t1 := Topico newTopico: 'Pharo' descripcion: 'Preguntas sobre Pharo'.
 	t add: t1.
@@ -25,16 +26,18 @@ PreguntaTest >> setUp [
 	preg := Pregunta
 		newPregunta: 'Iceberg?'
 		descripcion: 'No funciona.'
-		topicos: t.
+		topicos: t
+		usuario: u.
 	pregunta := preg
 	"-----------------------------"
 ]
 
 { #category : #test }
 PreguntaTest >> testAgregarRespuesta [
-|r|
+|r u|
+u:= Usuario newNombreUsuario: 'user' contrasenia:'123'. 
 
-r := Respuesta  newRespuesta: 'La solucion es...'.
+r := Respuesta  newRespuesta: 'La solucion es...' usuario:u.
 pregunta agregarRespuesta: r.
 
 self assert: (pregunta respuestas includes:r).

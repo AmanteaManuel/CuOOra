@@ -13,7 +13,8 @@ Class {
 
 { #category : #running }
 CuOOraTest >> setUp [
-	| usuario pregunta t1 t2 t3 tList respuesta |
+	| usuario pregunta t1 t2 t3 tList respuesta u |
+	u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
 	sistema := CuOOra new.
 	tList := OrderedCollection new.
 	"Agrego usuarios al sistema"
@@ -35,13 +36,15 @@ CuOOraTest >> setUp [
 	pregunta := Pregunta
 		newPregunta: 'select?'
 		descripcion: 'como se hace un select'
-		topicos: tList.
+		topicos: tList
+		usuario:u.
 	sistema preguntas add: pregunta.
 	usuarioLogueado posts add: pregunta.
 	pregunta := Pregunta
 		newPregunta: 'OrderedCollection?'
 		descripcion: 'como creo una instancia?'
-		topicos: tList.
+		topicos: tList
+		usuario:u.
 	sistema preguntas add: pregunta.
 	"-----------------------------------------------------------"
 	respuesta := Respuesta
@@ -93,12 +96,13 @@ CuOOraTest >> testAltaRespuestaPreguntaUsuario [
 
 { #category : #test }
 CuOOraTest >> testAltaTopicoDescripcion [
-	| t top |
+	| t topicosRepetidos|
 	t := sistema altaTopico: 'Programacion' descripcion: 'prueba'.
 	self assert: (sistema topicos includes: t).
 	"Pruebo con un topico que ya exista."
-	t := sistema altaTopico: 'POO' descripcion: 'POO'.
-	self deny: (sistema topicos includes: t)
+	t := sistema altaTopico: 'POO' descripcion: 'Prueba'.
+	topicosRepetidos:= (sistema topicos select: [  :topic | topic nombre = 'POO' ]) size.
+	self deny: (topicosRepetidos = 2).
 ]
 
 { #category : #test }

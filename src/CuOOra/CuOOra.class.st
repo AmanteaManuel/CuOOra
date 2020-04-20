@@ -64,8 +64,11 @@ CuOOra >> altaTopico: nombreStr descripcion: descripcionStr [
 	| topico |
 	topico := self validarTopico: nombreStr.
 	topico
-		ifNil: [ topico := Topico newTopico: nombreStr descripcion: descripcionStr.
-			^ topicos add: topico ].
+		ifNil: [ 
+			topico := Topico newTopico: nombreStr descripcion: descripcionStr.
+			topicos add: topico ].
+		^ topico.
+		
 ]
 
 { #category : #methods }
@@ -101,7 +104,7 @@ CuOOra >> existeNombreUsuario: nombreStr [
 
 { #category : #methods }
 CuOOra >> generarListaTopicos: topicoslist [
-	| list topicosStrList |
+	| list topicosStrList  |		
 	list := OrderedCollection new.
 	topicosStrList := topicoslist splitOn: ','.
 	topicosStrList

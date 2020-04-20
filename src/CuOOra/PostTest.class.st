@@ -13,14 +13,16 @@ Class {
 
 { #category : #running }
 PostTest >> setUp [
-	| topicos |
+	| topicos u|
+	u:= Usuario newNombreUsuario: 'user' contrasenia:'123'.
 	usuario := Usuario newNombreUsuario: 'Manuel' contrasenia: 'Amantea'.
 	topicos := OrderedCollection new.
 	topicos add: [ Topico newTopico: 'SQL' descripcion: 'base de datos' ].
 	pregunta := Pregunta
 		newPregunta: 'pregunta prueba'
 		descripcion: 'asd'
-		topicos: topicos.
+		topicos: topicos
+		usuario:u.
 ]
 
 { #category : #test }
